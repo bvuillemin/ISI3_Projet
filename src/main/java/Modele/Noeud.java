@@ -3,16 +3,15 @@ package Modele;
 /**
  * Created by benoitvuillemin on 06/05/2015.
  */
+enum TypeNoeud{
+    NORMAL,
+    INCENDIE
+}
 public class Noeud {
     private int id;
     private int x;
     private int y;
     private TypeNoeud type;
-
-    public enum TypeNoeud{
-        NORMAL,
-        INCENDIE
-    }
 
     public Noeud(int id, int x, int y, TypeNoeud type) {
         this.id = id;

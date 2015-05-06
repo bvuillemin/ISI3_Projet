@@ -3,17 +3,16 @@ package Modele;
 /**
  * Created by benoitvuillemin on 06/05/2015.
  */
+enum typeArc{
+    PLAT,
+    ESCARPE,
+    INONDE
+}
 public class Arc {
     private int noeud1;
     private int noeud2;
     private int longueur;
     private typeArc type;
-
-    public enum typeArc{
-        PLAT,
-        ESCARPE,
-        INONDE
-    }
 
     public Arc(int noeud1, int noeud2, int longueur, typeArc type) {
         this.noeud1 = noeud1;
