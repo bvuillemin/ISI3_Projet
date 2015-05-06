@@ -7,14 +7,14 @@ public class Noeud {
     private int id;
     private int x;
     private int y;
-    private Type type;
+    private TypeNoeud type;
 
-    public enum Type{
+    public enum TypeNoeud{
         NORMAL,
         INCENDIE
     }
 
-    public Noeud(int id, int x, int y, Type type) {
+    public Noeud(int id, int x, int y, TypeNoeud type) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -45,11 +45,11 @@ public class Noeud {
         this.y = y;
     }
 
-    public Type getType() {
+    public TypeNoeud getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(TypeNoeud type) {
         this.type = type;
     }
 }
