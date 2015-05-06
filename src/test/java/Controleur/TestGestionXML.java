@@ -1,5 +1,6 @@
 package Controleur;
 
+import org.dom4j.DocumentException;
 import org.junit.Test;
 
 /**
@@ -9,7 +10,11 @@ public class TestGestionXML {
 final String repertoire = "src/test/resources/test.xml";
     @Test
     public void testXML(){
-        GestionXML.LectureXML(repertoire);
+        try {
+            GestionXML.LectureXML(repertoire);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
     }
 
 }

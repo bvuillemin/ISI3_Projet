@@ -10,31 +10,31 @@ enum typeArc {
 }
 
 public class Arc {
-    private int noeud1;
-    private int noeud2;
+    private Noeud noeud1;
+    private Noeud noeud2;
     private int longueur;
     private typeArc type;
 
-    public Arc(int noeud1, int noeud2, int longueur, typeArc type) {
+    public Arc(Noeud noeud1, Noeud noeud2, int longueur, typeArc type) {
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.longueur = longueur;
         this.type = type;
     }
 
-    public int getNoeud1() {
+    public Noeud getNoeud1() {
         return noeud1;
     }
 
-    public void setNoeud1(int noeud1) {
+    public void setNoeud1(Noeud noeud1) {
         this.noeud1 = noeud1;
     }
 
-    public int getNoeud2() {
+    public Noeud getNoeud2() {
         return noeud2;
     }
 
-    public void setNoeud2(int noeud2) {
+    public void setNoeud2(Noeud noeud2) {
         this.noeud2 = noeud2;
     }
 

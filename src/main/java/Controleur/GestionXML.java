@@ -1,39 +1,37 @@
 package Controleur;
 
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by benoitvuillemin on 06/05/2015.
  */
 public class GestionXML {
-    public static void LectureXML(String repertoire) {
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+
+    public static void LectureXML(String repertoire) throws DocumentException {
+        SAXReader reader = new SAXReader();
+        URL url = null;
         try {
-            final DocumentBuilder builder = factory.newDocumentBuilder();
-            try {
-                final Document document = builder.parse(new File(repertoire));
-
-                //Affiche la version de XML
-                System.out.println(document.getXmlVersion());
-
-                //Affiche l'encodage
-                System.out.println(document.getXmlEncoding());
-
-                //Affiche s'il s'agit d'un document standalone
-                System.out.println(document.getXmlStandalone());
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            url = new URL(repertoire);
+            Document document = reader.read(url);
+            Element root = document.getRootElement();
+            for ( int i = 0, size = root.nodeCount(); i < size; i++ ) {
+                Node node = root.node(i);
+                if ( node instanceof Element ) {
+                }
+                else {
+                    System.out.println(node.getStringValue());
+                }
             }
-        } catch (ParserConfigurationException e) {
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }

@@ -33,7 +33,7 @@ public class Graphe {
     public void supprimerNoeud(Noeud n) {
         liste_noeuds.remove(n);
         for (Arc arc : liste_arcs) {
-            if (arc.getNoeud1() == n.getId() || arc.getNoeud2() == n.getId()) {
+            if (arc.getNoeud1() == n || arc.getNoeud2() == n) {
                 liste_arcs.remove(arc);
             }
         }
@@ -48,10 +48,10 @@ public class Graphe {
             boolean noeud1_existe = false;
             boolean noeud2_existe = false;
             for (Noeud noeud : liste_noeuds) {
-                if (a.getNoeud1() == noeud.getId()) {
+                if (a.getNoeud1() == noeud) {
                     noeud1_existe = true;
                 }
-                if (a.getNoeud2() == noeud.getId()) {
+                if (a.getNoeud2() == noeud) {
                     noeud2_existe = true;
                 }
             }
