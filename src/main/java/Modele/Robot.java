@@ -10,7 +10,6 @@ import java.util.Map;
 public class Robot {
 
     protected Noeud noeudActuel;
-    protected Noeud noeudDestination;
     protected ArrayList<typeArc> listTypeArcTraversable;
     protected ArrayList<Arc> listArcPlusCourt;
     protected Graphe graphe;
@@ -29,20 +28,12 @@ public class Robot {
         return listTypeArcTraversable;
     }
 
-    public Noeud getNoeudDestination() {
-        return noeudDestination;
-    }
-
     public void setNoeudActuel(Noeud noeudActuel) {
         this.noeudActuel = noeudActuel;
     }
 
     public void setListTypeArcTraversable(ArrayList<typeArc> listTypeArcTraversable) {
         this.listTypeArcTraversable = listTypeArcTraversable;
-    }
-
-    public void setNoeudDestination(Noeud noeudDestination) {
-        this.noeudDestination = noeudDestination;
     }
 
     public ArrayList<Arc> plusCourtChemin(Noeud noeudDestination){
@@ -53,5 +44,9 @@ public class Robot {
         }
 
         return listArcPlusCourt;
+    }
+
+    public void aller (Noeud noeudDestination) {
+
     }
 }
