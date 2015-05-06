@@ -15,7 +15,7 @@ public class Robot {
     protected ArrayList<Arc> listArcPlusCourt;
     protected Graphe graphe;
     protected Map dijkstra;
-    private int i;
+
 
     public Robot(Noeud noeudActuel) {
         this.noeudActuel = noeudActuel;
@@ -45,11 +45,12 @@ public class Robot {
         this.noeudDestination = noeudDestination;
     }
 
-    public ArrayList<Arc> plusCourtChemin(Noeud noeudActuel, Noeud noeudDestination){
+    public ArrayList<Arc> plusCourtChemin(Noeud noeudDestination){
         dijkstra = new HashMap();
-        //for (i : graphe.getListe_noeud().indexOf()){
-            dijkstra.put(i,-1);
-        //}
+        int num = 0;
+        for (int i = 0 ; i < graphe.getListe_noeud().size() ; i++){
+            dijkstra.put(graphe.getListe_noeud().indexOf(i),-1);
+        }
 
         return listArcPlusCourt;
     }
