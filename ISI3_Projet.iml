@@ -23,5 +23,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="madkit-5.0.5.2" level="project" />
   </component>
 </module>
