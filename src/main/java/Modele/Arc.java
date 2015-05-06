@@ -3,11 +3,12 @@ package Modele;
 /**
  * Created by benoitvuillemin on 06/05/2015.
  */
-enum typeArc{
+enum typeArc {
     PLAT,
     ESCARPE,
     INONDE
 }
+
 public class Arc {
     private int noeud1;
     private int noeud2;
@@ -51,5 +52,9 @@ public class Arc {
 
     public void setType(typeArc type) {
         this.type = type;
+    }
+
+    public String toString() {
+        return "<edge nd1=" + noeud1 + " nd2=" + noeud2 + " type=" + type + " />";
     }
 }

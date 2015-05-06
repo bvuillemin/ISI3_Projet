@@ -3,10 +3,11 @@ package Modele;
 /**
  * Created by benoitvuillemin on 06/05/2015.
  */
-enum TypeNoeud{
+enum TypeNoeud {
     NORMAL,
     INCENDIE
 }
+
 public class Noeud {
     private int id;
     private int x;
@@ -50,5 +51,9 @@ public class Noeud {
 
     public void setType(TypeNoeud type) {
         this.type = type;
+    }
+
+    public String toString() {
+        return "<node id=" + id + " x=" + x + " y=" + y + " type=" + type + " />";
     }
 }
