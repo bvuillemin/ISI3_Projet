@@ -10,11 +10,11 @@ enum TypeNoeud {
 
 public class Noeud {
     private int id;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private TypeNoeud type;
 
-    public Noeud(int id, int x, int y, TypeNoeud type) {
+    public Noeud(int id, double x, double y, TypeNoeud type) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -29,19 +29,19 @@ public class Noeud {
         this.id = id;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -54,6 +54,6 @@ public class Noeud {
     }
 
     public String toString() {
-        return "<node id=" + id + " x=" + x + " y=" + y + " type=" + type + " />";
+        return "Noeud : id=" + id + " x=" + x + " y=" + y + " type=" + type;
     }
 }

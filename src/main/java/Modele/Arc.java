@@ -55,6 +55,6 @@ public class Arc {
     }
 
     public String toString() {
-        return "<edge nd1=" + noeud1 + " nd2=" + noeud2 + " type=" + type + " />";
+        return "Arc : nd1=" + noeud1 + " nd2=" + noeud2 + " type=" + type;
     }
 }
