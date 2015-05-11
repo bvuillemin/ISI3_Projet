@@ -21,8 +21,12 @@ import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;
 public class TestGestionXML {
     final String repertoire = "src/test/resources/test.xml";
 
+    /**
+     * Teste la lecture et l'écriture d'un fichier XML
+     * @throws Exception si la lecture ou l'écriture ne marchent pas
+     */
     @Test
-    public void testLectureXML() {
+    public void testXML() throws Exception {
         Graphe g = GestionXML.LectureXML(repertoire);
         try {
             GestionXML.SauvegardeXML(g, "src/test/resources/essai.xml");

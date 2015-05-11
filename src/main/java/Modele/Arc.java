@@ -18,17 +18,24 @@ public class Arc {
     private int longueur;
     private TypeArc type;
 
-    public Arc(Noeud noeud1, Noeud noeud2, String type) {
+    /**
+     * Créé un nouvel arc
+     *
+     * @param noeud1 1er noeud
+     * @param noeud2 2eme noeud
+     * @param type   type de l'arc
+     */
+    public Arc(Noeud noeud1, Noeud noeud2, String type) throws Exception {
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.longueur = longueurArc(noeud1, noeud2);
         this.type = ArcStringToEnum(type);
     }
 
-    public Arc(Noeud noeud1, Noeud noeud2, int longueur, TypeArc type) {
+    public Arc(Noeud noeud1, Noeud noeud2, TypeArc type) {
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
-        this.longueur = longueur;
+        this.longueur = longueurArc(noeud1, noeud2);
         this.type = type;
     }
 
@@ -52,10 +59,6 @@ public class Arc {
         return longueur;
     }
 
-    public void setLongueur(int longueur) {
-        this.longueur = longueur;
-    }
-
     public TypeArc getType() {
         return type;
     }
@@ -68,6 +71,13 @@ public class Arc {
         return "Arc : nd1=" + noeud1 + " nd2=" + noeud2 + " type=" + type;
     }
 
+    /**
+     * Convertit un String en une instance de typeArc (de type enum). Utilisé lors de la lecture d'un fichier XML
+     *
+     * @param s String de départ
+     * @return typeArc correspondant
+     * @throws IllegalArgumentException si le string de départ ne correspond à rien
+     */
     private TypeArc ArcStringToEnum(String s) {
         TypeArc t;
         if (s.equals("PLAT")) {
@@ -77,25 +87,37 @@ public class Arc {
         } else if (s.equals("INNONDE")) {
             t = TypeArc.INNONDE;
         } else {
-            return null;
+            throw new IllegalArgumentException("String de typeArc invalide" + s);
         }
         return t;
     }
-    public String getTypeString(){
-        if (this.type.equals(TypeArc.PLAT)){
+
+    /**
+     * Convertit une instance de typeArc (de type enum) en String. Utilisé lors de l'écriture d'un fichier XML
+     *
+     * @return String correspondant au typeArc
+     * @throws Exception si le typeArc est invalide
+     */
+    public String getTypeString() throws Exception {
+        if (this.type.equals(TypeArc.PLAT)) {
             return "PLAT";
-        }
-        else if (this.type.equals(TypeArc.ESCARPE)){
+        } else if (this.type.equals(TypeArc.ESCARPE)) {
             return "ESCARPE";
-        }
-        else if (this.type.equals(TypeArc.INNONDE)){
+        } else if (this.type.equals(TypeArc.INNONDE)) {
             return "INNONDE";
-        }
-        else{
-            return "";
+        } else {
+            throw new Exception("TypeArc de départ invalide");
         }
     }
-    private int longueurArc(Noeud n1, Noeud n2){
+
+    /**
+     * Calcule la longueur entre deux noeuds (pour la création d'un arc)
+     *
+     * @param n1 noeud 1
+     * @param n2 noeud 2
+     * @return la longueur entre les deux noeuds
+     */
+    private int longueurArc(Noeud n1, Noeud n2) {
         return (int) sqrt(pow((n1.getX() - n2.getX()), 2) + pow((n1.getY() - n2.getY()), 2));
     }
 }

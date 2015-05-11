@@ -13,7 +13,6 @@ import org.jdom2.output.XMLOutputter;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +20,11 @@ import java.util.List;
  * Created by benoitvuillemin on 06/05/2015.
  */
 public class GestionXML {
+    /**
+     * Copie le contenu d'un fichier xml dans un graphe
+     * @param repertoire répertoire du fichier XML
+     * @return le graphe associé
+     */
     public static Graphe LectureXML(String repertoire) {
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File(repertoire);
@@ -62,15 +66,21 @@ public class GestionXML {
             g.setListe_arcs(liste_arc);
             return g;
 
-        } catch (IOException io) {
-            System.out.println(io.getMessage());
         } catch (JDOMException jdomex) {
             System.out.println(jdomex.getMessage());
+        } catch (Exception io) {
+            System.out.println(io.getMessage());
         }
         return null;
     }
 
-    public static void SauvegardeXML(Graphe g, String repertoire) throws IOException {
+    /**
+     * Sauvegarde le contenu d'un graphe dans un XML
+     * @param g le graphe à sauvegarder
+     * @param repertoire le répertoire + le nom du nouveau chichier à sauvegarder
+     * @throws Exception si la création du fichier ne marche pas
+     */
+    public static void SauvegardeXML(Graphe g, String repertoire) throws Exception {
         Element osm = new Element("osm");
         Document doc = new Document(osm);
         for (Noeud noeud : g.getListe_noeud()) {
@@ -89,7 +99,7 @@ public class GestionXML {
             doc.getRootElement().addContent(element);
         }
 
-// new XMLOutputter().output(doc, System.out);
+        // new XMLOutputter().output(doc, System.out);
         XMLOutputter xmlOutput = new XMLOutputter();
 
         // display nice nice
