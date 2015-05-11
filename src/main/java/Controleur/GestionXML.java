@@ -73,21 +73,27 @@ public class GestionXML {
     public static void SauvegardeXML(Graphe g, String repertoire) throws IOException {
         Element osm = new Element("osm");
         Document doc = new Document(osm);
-        doc.setRootElement(osm);
-        Element element_arc = new Element("edge");
         for (Noeud noeud : g.getListe_noeud()) {
-            Element element_noeud = new Element("node");
-            element_noeud.setAttribute("id", Integer.toString(noeud.getId()));
-            element_noeud.setAttribute("x", Double.toString(noeud.getX()));
-            element_noeud.setAttribute("y", Double.toString(noeud.getY()));
-            element_noeud.setAttribute("type", noeud.getTypeString());
-            doc.getRootElement().addContent(element_noeud);
+            Element element = new Element("node");
+            element.setAttribute("id", Integer.toString(noeud.getId()));
+            element.setAttribute("x", Double.toString(noeud.getX()));
+            element.setAttribute("y", Double.toString(noeud.getY()));
+            element.setAttribute("type", noeud.getTypeString());
+            doc.getRootElement().addContent(element);
         }
+        for (Arc arc : g.getListe_arcs()) {
+            Element element = new Element("edge");
+            element.setAttribute("nd1", Integer.toString(arc.getNoeud1().getId()));
+            element.setAttribute("nd2", Integer.toString(arc.getNoeud2().getId()));
+            element.setAttribute("type", arc.getTypeString());
+            doc.getRootElement().addContent(element);
+        }
+
 // new XMLOutputter().output(doc, System.out);
         XMLOutputter xmlOutput = new XMLOutputter();
 
         // display nice nice
         xmlOutput.setFormat(Format.getPrettyFormat());
-        xmlOutput.output(doc, new FileWriter("repertoire"));
+        xmlOutput.output(doc, new FileWriter(repertoire));
     }
 }
