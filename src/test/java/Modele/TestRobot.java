@@ -30,9 +30,9 @@ public class TestRobot {
     private ArrayList<Arc> cheminR1 = new ArrayList<Arc>();
     public TestRobot() {
         r1 = new Robot(noeudDepartR1);
-        cheminR1.add(new Arc(noeudDepartR1,noeud2R1,1,typeArc.PLAT));
-        cheminR1.add(new Arc(noeud2R1,noeud3R1,1,typeArc.ESCARPE));
-        cheminR1.add(new Arc(noeud3R1,newNoeudDepartR1,2,typeArc.INONDE));
+        cheminR1.add(new Arc(noeudDepartR1,noeud2R1,1,TypeArc.PLAT));
+        cheminR1.add(new Arc(noeud2R1,noeud3R1,1,TypeArc.ESCARPE));
+        cheminR1.add(new Arc(noeud3R1,newNoeudDepartR1,2,TypeArc.INNONDE));
         r2 = new Robot(noeudDepartR1);
         r2.setChemin(cheminR1);
     }
