@@ -8,18 +8,25 @@ package Modele;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author thomascoquan
  */
-public class TestRobotAPates extends TestRobot{
+public class TestRobotAPates {
 
     RobotAPates rp1;
     private Noeud noeudDepartRP1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL);
+    private Noeud noeud2RP1 = new Noeud(0, 0.0, 1.0, TypeNoeud.INCENDIE);
+    private ArrayList<Arc> cheminPlat = new ArrayList<Arc>();
 
     public TestRobotAPates() {
         rp1 = new RobotAPates(noeudDepartRP1);
+        cheminPlat.add(new Arc(noeudDepartRP1,noeud2RP1,1,TypeArc.PLAT));
+        rp1.setChemin(cheminPlat);
     }
 
     @BeforeClass
@@ -36,4 +43,8 @@ public class TestRobotAPates extends TestRobot{
     // @Test
     // public void hello() {}
 
+    @Test
+    public void testRun() {
+        rp1.run();
+    }
 }

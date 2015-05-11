@@ -24,14 +24,6 @@ public class Robot extends Thread{
         capacite=1;
     }
 
-    public Noeud getNoeudActuel() {
-        return noeudActuel;
-    }
-
-    public ArrayList<TypeArc> getListTypeArcTraversable() {
-        return listTypeArcTraversable;
-    }
-
     public ArrayList<Arc> getChemin() {
         return chemin;
     }
@@ -45,9 +37,13 @@ public class Robot extends Thread{
     }
 
     public boolean capablePasser(TypeArc typeArc) {
-        if (listTypeArcTraversable.contains(typeArc)) {
-            return true;
-        } else {
+        try {
+            if (listTypeArcTraversable.contains(typeArc)) {
+                return true;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Absence d'arc traversable");
+        } finally {
             return false;
         }
     }
@@ -62,8 +58,22 @@ public class Robot extends Thread{
         return listArcPlusCourt;
     }
 
-    public void eteindreIncendie() {
-
+    public void eteindreIncendie() throws InterruptedException {
+        try {
+            if (noeudActuel.getType() == TypeNoeud.INCENDIE) {
+                while (noeudActuel.getIntensite() != 0) {
+                    noeudActuel.setIntensite(noeudActuel.getIntensite() - capacite);
+                    synchronized (this) {
+                        this.wait(1000);
+                    }
+                }
+                System.out.println("Incendie éteint");
+            } else {
+                System.out.println("Pas d'incendie à éteindre");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Erreur : Robot se trouvant nulle part ...");
+        }
     }
 
     @Override
@@ -89,6 +99,10 @@ public class Robot extends Thread{
                 }
             }
         }
-        this.eteindreIncendie();
+        try {
+            this.eteindreIncendie();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
