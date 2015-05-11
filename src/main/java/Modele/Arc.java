@@ -81,6 +81,20 @@ public class Arc {
         }
         return t;
     }
+    public String getTypeString(){
+        if (this.type.equals(TypeArc.PLAT)){
+            return "PLAT";
+        }
+        else if (this.type.equals(TypeArc.ESCARPE)){
+            return "ESCARPE";
+        }
+        else if (this.type.equals(TypeArc.INNONDE)){
+            return "INNONDE";
+        }
+        else{
+            return "";
+        }
+    }
     private int longueurArc(Noeud n1, Noeud n2){
         return (int) sqrt(pow((n1.getX() - n2.getX()), 2) + pow((n1.getY() - n2.getY()), 2));
     }

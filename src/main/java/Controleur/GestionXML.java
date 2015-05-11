@@ -8,8 +8,11 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +21,6 @@ import java.util.List;
  * Created by benoitvuillemin on 06/05/2015.
  */
 public class GestionXML {
-
-
     public static Graphe LectureXML(String repertoire) {
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File(repertoire);
@@ -67,5 +68,26 @@ public class GestionXML {
             System.out.println(jdomex.getMessage());
         }
         return null;
+    }
+
+    public static void SauvegardeXML(Graphe g, String repertoire) throws IOException {
+        Element osm = new Element("osm");
+        Document doc = new Document(osm);
+        doc.setRootElement(osm);
+        Element element_arc = new Element("edge");
+        for (Noeud noeud : g.getListe_noeud()) {
+            Element element_noeud = new Element("node");
+            element_noeud.setAttribute("id", Integer.toString(noeud.getId()));
+            element_noeud.setAttribute("x", Double.toString(noeud.getX()));
+            element_noeud.setAttribute("y", Double.toString(noeud.getY()));
+            element_noeud.setAttribute("type", noeud.getTypeString());
+            doc.getRootElement().addContent(element_noeud);
+        }
+// new XMLOutputter().output(doc, System.out);
+        XMLOutputter xmlOutput = new XMLOutputter();
+
+        // display nice nice
+        xmlOutput.setFormat(Format.getPrettyFormat());
+        xmlOutput.output(doc, new FileWriter("repertoire"));
     }
 }
