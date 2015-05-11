@@ -48,7 +48,7 @@ public class Manager {
     }
 
     public void affecterIncendie() {
-        ArrayList<Arc> chemin;
+        ArrayList<Arc> chemin = new ArrayList<Arc>();
         double distance;
         double distanceMini=10000.0;
         Robot robotChoisi;
@@ -57,7 +57,8 @@ public class Manager {
             robotChoisi=listRobots.get(0);
             for (Robot robot : listRobots) {
                 distance=0.0;
-                chemin = robot.plusCourtChemin(incendie);
+                //chemin = robot.plusCourtChemin(incendie);
+                chemin.add(new Arc(robot.getNoeudActuel(),new Noeud(0,1.0,1.0,TypeNoeud.INCENDIE),TypeArc.PLAT));
                 for (Arc arc : chemin) {
                     distance+=arc.getLongueur();
                 }

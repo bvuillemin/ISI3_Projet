@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by thomascoquan on 06/05/2015.
  */
-public class Robot extends Thread{
+public abstract class Robot extends Thread{
 
     protected Noeud noeudActuel;
     protected ArrayList<TypeArc> listTypeArcTraversable;
@@ -18,10 +18,18 @@ public class Robot extends Thread{
     protected Map dijkstra;
     protected int capacite;
 
-
+    /**
+     * Constructeur d'un Robot
+     * Robot est une classe abstraite.
+     * @param noeudActuel
+     */
     public Robot(Noeud noeudActuel) {
         this.noeudActuel = noeudActuel;
         capacite=1;
+    }
+
+    public Noeud getNoeudActuel() {
+        return noeudActuel;
     }
 
     public ArrayList<Arc> getChemin() {
@@ -36,6 +44,11 @@ public class Robot extends Thread{
         this.chemin = chemin;
     }
 
+    /**
+     * Indique si le robot est capable de passer ce type d'arc
+     * @param typeArc
+     * @return vrai si capable, faux sinon
+     */
     public boolean capablePasser(TypeArc typeArc) {
         try {
             if (listTypeArcTraversable.contains(typeArc)) {
@@ -48,16 +61,12 @@ public class Robot extends Thread{
         }
     }
 
-    public ArrayList<Arc> plusCourtChemin(Noeud noeudDestination){
-        dijkstra = new HashMap();
-        int num = 0;
-        for (int i = 0 ; i < graphe.getListe_noeud().size() ; i++){
-            dijkstra.put(graphe.getListe_noeud().indexOf(i),-1);
-        }
-
-        return listArcPlusCourt;
-    }
-
+    /**
+     * Fonction pour éteindre un incendie
+     * Si le noeud sur lequel se trouve le robot n'est pas un incendie, on le signal
+     * Sinon, on éteins l'incendie : chaque seconde l'intensité de l'incendie sera diminué de la capacité du robot.
+     * @throws InterruptedException
+     */
     public void eteindreIncendie() throws InterruptedException {
         try {
             if (noeudActuel.getType() == TypeNoeud.INCENDIE) {
@@ -76,6 +85,13 @@ public class Robot extends Thread{
         }
     }
 
+    /**
+     * Fonction run du Thread : déplace le robot suivant le chemin qu'il doit suivre.
+     * S'il n'a pas de chemin à suivre, on le signale et le robot ne bouge pas.
+     * Sinon, il essaie d'avancer en suivant les arc du chemin. Si jamais il rencontre un arc qu'il ne peux pas
+     * traverser, on le signale et il s'arrête là.
+     * S'il arrive au bout de chemin, il tente d'éteindre l'incendie s'y trouvant via la fonction eteindreIncendie
+     */
     @Override
     public void run() {
         Arc morceauChemin;

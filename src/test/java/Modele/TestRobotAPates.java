@@ -12,21 +12,33 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.*;
+
 /**
  *
  * @author thomascoquan
  */
 public class TestRobotAPates {
 
-    RobotAPates rp1;
-    private Noeud noeudDepartRP1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL);
-    private Noeud noeud2RP1 = new Noeud(0, 0.0, 1.0, TypeNoeud.INCENDIE);
+    private Robot r0;
+    private Robot r1;
+    private Robot r2;
+    private Robot r3;
+
+    private Noeud noeudDepartR1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL);
+    private Noeud noeud2R1 = new Noeud(0, 0.0, 1.0, TypeNoeud.NORMAL);
+    private Noeud noeud3R1 = new Noeud(0, 0.0, 2.0, TypeNoeud.NORMAL);
+    private Noeud newNoeudDepartR1 = new Noeud(0, 1.0, 0.0, TypeNoeud.NORMAL);
+    private Noeud noeudDepartR3 = new Noeud(0, 0.0, 0.0, TypeNoeud.INCENDIE);
+
+    private ArrayList<Arc> cheminR1 = new ArrayList<Arc>();
     private ArrayList<Arc> cheminPlat = new ArrayList<Arc>();
 
+    /**
+     * Test pour l'ensemble des fonctions de la classe abstraite Robot via sa classe fille RobotAPates
+     */
     public TestRobotAPates() {
-        rp1 = new RobotAPates(noeudDepartRP1);
-        cheminPlat.add(new Arc(noeudDepartRP1,noeud2RP1,TypeArc.PLAT));
-        rp1.setChemin(cheminPlat);
+        r0 = new RobotAPates(null);
     }
 
     @BeforeClass
@@ -43,8 +55,12 @@ public class TestRobotAPates {
     // @Test
     // public void hello() {}
 
+    /**
+     * Test du run de Robot
+     * 1er test : Vérification qu'il n'y a pas de problème si le robot ne posséde pas de position, ni de chemin
+     */
     @Test
     public void testRun() {
-        rp1.run();
+        r0.run();
     }
 }

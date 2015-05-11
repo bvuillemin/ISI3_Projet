@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
  *
  * @author thomascoquan
  */
-public class TestRobotChenille extends TestRobot{
+public class TestRobotChenille{
 
     RobotChenille rc1;
     private Noeud noeudDepartRP1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL);
