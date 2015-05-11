@@ -10,7 +10,8 @@ import java.util.Map;
 public class Robot {
 
     protected Noeud noeudActuel;
-    protected ArrayList<TypeArc> listTypeArcTraversable;
+    protected Noeud noeudDestination;
+    protected ArrayList<typeArc> listTypeArcTraversable;
     protected ArrayList<Arc> listArcPlusCourt;
     protected Graphe graphe;
     protected Map dijkstra;
@@ -24,29 +25,48 @@ public class Robot {
         return noeudActuel;
     }
 
-    public ArrayList<TypeArc> getListTypeArcTraversable() {
+    public ArrayList<typeArc> getListTypeArcTraversable() {
         return listTypeArcTraversable;
+    }
+
+    public Noeud getNoeudDestination() {
+        return noeudDestination;
     }
 
     public void setNoeudActuel(Noeud noeudActuel) {
         this.noeudActuel = noeudActuel;
     }
 
-    public void setListTypeArcTraversable(ArrayList<TypeArc> listTypeArcTraversable) {
+    public void setListTypeArcTraversable(ArrayList<typeArc> listTypeArcTraversable) {
         this.listTypeArcTraversable = listTypeArcTraversable;
     }
 
-    public ArrayList<Arc> plusCourtChemin(Noeud noeudDestination){
-        dijkstra = new HashMap();
-        int num = 0;
-        for (int i = 0 ; i < graphe.getListe_noeud().size() ; i++){
-            dijkstra.put(graphe.getListe_noeud().indexOf(i),-1);
-        }
-
-        return listArcPlusCourt;
+    public void setNoeudDestination(Noeud noeudDestination) {
+        this.noeudDestination = noeudDestination;
     }
 
-    public void aller (Noeud noeudDestination) {
+    public ArrayList<Arc> plusCourtChemin(Noeud noeudDestination){
+        Map<Noeud,Integer> dijkstra = new HashMap<Noeud,Integer>();
+        ArrayList<Arc> listArcPlusCourt;
+        ArrayList<Noeud> listNoeudsNonVu;
+        int num = 0;
+        Noeud noeudParcouru;
 
+        for (int i = 0 ; i < graphe.getListe_noeud().size() ; i++){
+            dijkstra.put(graphe.getListe_noeud().get(i),-1);
+        }
+        listNoeudsNonVu = graphe.getListe_noeud();
+        while (listNoeudsNonVu.isEmpty()){ //prévoir éventuellement une valeur d'arret lorsque on est sur qu'on sortira pas un chemin plus court pour la destination
+            int min = 999999999;
+            for (HashMap.Entry<Noeud,Integer> varParcours : dijkstra.entrySet()){ // on récupère la plus petite valeur dans les noeuds pas encore vu
+                Integer minLocal = varParcours.getValue();
+                if (minLocal < min){
+                    min = minLocal;
+                    noeudParcouru = varParcours.getKey();
+                }
+            }
+
+        }
+        return null; //listArcPlusCourt;
     }
 }
