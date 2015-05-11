@@ -10,7 +10,7 @@ import java.util.Map;
 public class Robot {
 
     protected Noeud noeudActuel;
-    protected ArrayList<typeArc> listTypeArcTraversable;
+    protected ArrayList<TypeArc> listTypeArcTraversable;
     protected ArrayList<Arc> listArcPlusCourt;
     protected Graphe graphe;
     protected Map dijkstra;
@@ -24,7 +24,7 @@ public class Robot {
         return noeudActuel;
     }
 
-    public ArrayList<typeArc> getListTypeArcTraversable() {
+    public ArrayList<TypeArc> getListTypeArcTraversable() {
         return listTypeArcTraversable;
     }
 
@@ -32,7 +32,7 @@ public class Robot {
         this.noeudActuel = noeudActuel;
     }
 
-    public void setListTypeArcTraversable(ArrayList<typeArc> listTypeArcTraversable) {
+    public void setListTypeArcTraversable(ArrayList<TypeArc> listTypeArcTraversable) {
         this.listTypeArcTraversable = listTypeArcTraversable;
     }
 

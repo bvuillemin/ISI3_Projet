@@ -9,6 +9,9 @@ public class Graphe {
     private ArrayList<Arc> liste_arcs;
     private ArrayList<Noeud> liste_noeuds;
 
+    public Graphe() {
+    }
+
     public Graphe(ArrayList<Arc> liste_arcs, ArrayList<Noeud> liste_noeud) {
         this.liste_arcs = liste_arcs;
         this.liste_noeuds = liste_noeud;
@@ -57,13 +60,20 @@ public class Graphe {
             }
             if (noeud1_existe && noeud2_existe) {
                 liste_arcs.add(a);
+            } else {
+                System.out.println("Arc impossible !" + a.toString());
             }
-            else{
-                System.out.println("Arc impossible !" +a.toString());
+        } else {
+            System.out.println("L'arc relie le même noeud !" + a.toString());
+        }
+    }
+
+    public Noeud trouverNoeudParId(int id) {
+        for (Noeud noeud : liste_noeuds) {
+            if (noeud.getId() == id) {
+                return noeud;
             }
         }
-        else{
-            System.out.println("L'arc relie le même noeud !" +a.toString());
-        }
+        return null;
     }
 }

@@ -14,6 +14,12 @@ public class Noeud {
     private double y;
     private TypeNoeud type;
 
+    public Noeud(int id, double x, double y, String type) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.type = NoeudStringToEnum(type);
+    }
     public Noeud(int id, double x, double y, TypeNoeud type) {
         this.id = id;
         this.x = x;
@@ -55,5 +61,17 @@ public class Noeud {
 
     public String toString() {
         return "Noeud : id=" + id + " x=" + x + " y=" + y + " type=" + type;
+    }
+
+    private TypeNoeud NoeudStringToEnum(String s) {
+        TypeNoeud t;
+        if (s.equals("NORMAL")) {
+            t = TypeNoeud.NORMAL;
+        } else if (s.equals("INCENDIE")) {
+            t = TypeNoeud.INCENDIE;
+        } else {
+            return null;
+        }
+        return t;
     }
 }

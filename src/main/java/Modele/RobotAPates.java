@@ -9,8 +9,8 @@ public class RobotAPates extends Robot {
 
     public RobotAPates(Noeud noeudActuel) {
         super(noeudActuel);
-        listTypeArcTraversable=new ArrayList<typeArc>();
-        listTypeArcTraversable.add(typeArc.ESCARPE);
-        listTypeArcTraversable.add(typeArc.PLAT);
+        listTypeArcTraversable=new ArrayList<TypeArc>();
+        listTypeArcTraversable.add(TypeArc.ESCARPE);
+        listTypeArcTraversable.add(TypeArc.PLAT);
     }
 }

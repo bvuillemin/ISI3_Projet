@@ -9,8 +9,8 @@ public class RobotChenille extends Robot {
 
     public RobotChenille(Noeud noeudActuel) {
         super(noeudActuel);
-        listTypeArcTraversable=new ArrayList<typeArc>();
-        listTypeArcTraversable.add(typeArc.INONDE);
-        listTypeArcTraversable.add(typeArc.PLAT);
+        listTypeArcTraversable=new ArrayList<TypeArc>();
+        listTypeArcTraversable.add(TypeArc.INNONDE);
+        listTypeArcTraversable.add(TypeArc.PLAT);
     }
 }
