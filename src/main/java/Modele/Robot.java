@@ -1,5 +1,6 @@
 package Modele;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,12 +8,12 @@ import java.util.Map;
 /**
  * Created by thomascoquan on 06/05/2015.
  */
-public class Robot {
+public class Robot extends Thread{
 
     protected Noeud noeudActuel;
-    protected Noeud noeudDestination;
     protected ArrayList<TypeArc> listTypeArcTraversable;
     protected ArrayList<Arc> listArcPlusCourt;
+    protected ArrayList<Arc> chemin;
     protected Graphe graphe;
     protected Map dijkstra;
 
@@ -29,44 +30,46 @@ public class Robot {
         return listTypeArcTraversable;
     }
 
-    public Noeud getNoeudDestination() {
-        return noeudDestination;
+    public ArrayList<Arc> getChemin() {
+        return chemin;
     }
 
     public void setNoeudActuel(Noeud noeudActuel) {
         this.noeudActuel = noeudActuel;
     }
 
-    public void setListTypeArcTraversable(ArrayList<TypeArc> listTypeArcTraversable) {
-        this.listTypeArcTraversable = listTypeArcTraversable;
-    }
-
-    public void setNoeudDestination(Noeud noeudDestination) {
-        this.noeudDestination = noeudDestination;
+    public void setChemin(ArrayList<Arc> chemin) {
+        this.chemin = chemin;
     }
 
     public ArrayList<Arc> plusCourtChemin(Noeud noeudDestination){
-        Map<Noeud,Integer> dijkstra = new HashMap<Noeud,Integer>();
-        ArrayList<Arc> listArcPlusCourt;
-        ArrayList<Noeud> listNoeudsNonVu;
+        dijkstra = new HashMap();
         int num = 0;
-        Noeud noeudParcouru;
-
         for (int i = 0 ; i < graphe.getListe_noeud().size() ; i++){
-            dijkstra.put(graphe.getListe_noeud().get(i),-1);
+            dijkstra.put(graphe.getListe_noeud().indexOf(i),-1);
         }
-        listNoeudsNonVu = graphe.getListe_noeud();
-        while (listNoeudsNonVu.isEmpty()){ //prévoir éventuellement une valeur d'arret lorsque on est sur qu'on sortira pas un chemin plus court pour la destination
-            int min = 999999999;
-            for (HashMap.Entry<Noeud,Integer> varParcours : dijkstra.entrySet()){ // on récupère la plus petite valeur dans les noeuds pas encore vu
-                Integer minLocal = varParcours.getValue();
-                if (minLocal < min){
-                    min = minLocal;
-                    noeudParcouru = varParcours.getKey();
+
+        return listArcPlusCourt;
+    }
+
+    @Override
+    public void run() {
+        Arc morceauChemin;
+        if (chemin == null) {
+            System.out.println("Pas de chemin à suivre.");
+        } else {
+            while (chemin.isEmpty() == false) {
+                try {
+                    morceauChemin = chemin.get(0);
+                    noeudActuel = morceauChemin.getNoeud2();
+                    chemin.remove(morceauChemin);
+                    synchronized (this) {
+                        this.wait(1000);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-
         }
-        return null; //listArcPlusCourt;
     }
 }
