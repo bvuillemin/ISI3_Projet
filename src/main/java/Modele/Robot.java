@@ -16,10 +16,12 @@ public class Robot extends Thread{
     protected ArrayList<Arc> chemin;
     protected Graphe graphe;
     protected Map dijkstra;
+    protected int capacite;
 
 
     public Robot(Noeud noeudActuel) {
         this.noeudActuel = noeudActuel;
+        capacite=1;
     }
 
     public Noeud getNoeudActuel() {
@@ -42,6 +44,14 @@ public class Robot extends Thread{
         this.chemin = chemin;
     }
 
+    public boolean capablePasser(TypeArc typeArc) {
+        if (listTypeArcTraversable.contains(typeArc)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public ArrayList<Arc> plusCourtChemin(Noeud noeudDestination){
         dijkstra = new HashMap();
         int num = 0;
@@ -50,6 +60,10 @@ public class Robot extends Thread{
         }
 
         return listArcPlusCourt;
+    }
+
+    public void eteindreIncendie() {
+
     }
 
     @Override
@@ -61,6 +75,10 @@ public class Robot extends Thread{
             while (chemin.isEmpty() == false) {
                 try {
                     morceauChemin = chemin.get(0);
+                    if (this.capablePasser(morceauChemin.getType())==false) {
+                        System.out.println("Impossible de passer");
+                        return;
+                    }
                     noeudActuel = morceauChemin.getNoeud2();
                     chemin.remove(morceauChemin);
                     synchronized (this) {
@@ -71,5 +89,6 @@ public class Robot extends Thread{
                 }
             }
         }
+        this.eteindreIncendie();
     }
 }
