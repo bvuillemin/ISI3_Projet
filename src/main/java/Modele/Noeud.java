@@ -98,6 +98,11 @@ public class Noeud {
 
     public void setType(TypeNoeud type) {
         this.type = type;
+        if (type.equals(TypeNoeud.NORMAL)) {
+            this.intensite = 0;
+        } else {
+            this.intensite = (int) (Math.random() * (9) + 1);
+        }
     }
 
     public String toString() {

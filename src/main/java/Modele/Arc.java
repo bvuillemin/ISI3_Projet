@@ -25,7 +25,7 @@ public class Arc {
      * @param noeud2 2eme noeud
      * @param type   type de l'arc
      */
-    public Arc(Noeud noeud1, Noeud noeud2, String type) throws Exception {
+    public Arc(Noeud noeud1, Noeud noeud2, String type) {
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.longueur = longueurArc(noeud1, noeud2);
@@ -45,6 +45,7 @@ public class Arc {
 
     public void setNoeud1(Noeud noeud1) {
         this.noeud1 = noeud1;
+        this.longueur = longueurArc(noeud1, noeud2);
     }
 
     public Noeud getNoeud2() {
@@ -53,6 +54,7 @@ public class Arc {
 
     public void setNoeud2(Noeud noeud2) {
         this.noeud2 = noeud2;
+        this.longueur = longueurArc(noeud1, noeud2);
     }
 
     public int getLongueur() {

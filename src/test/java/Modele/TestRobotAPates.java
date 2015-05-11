@@ -25,7 +25,7 @@ public class TestRobotAPates {
 
     public TestRobotAPates() {
         rp1 = new RobotAPates(noeudDepartRP1);
-        cheminPlat.add(new Arc(noeudDepartRP1,noeud2RP1,1,TypeArc.PLAT));
+        cheminPlat.add(new Arc(noeudDepartRP1,noeud2RP1,TypeArc.PLAT));
         rp1.setChemin(cheminPlat);
     }
 

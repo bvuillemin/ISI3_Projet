@@ -35,11 +35,11 @@ public class TestRobot {
     public TestRobot() {
         r0 = new Robot(null);
         r1 = new Robot(noeudDepartR1);
-        cheminR1.add(new Arc(noeudDepartR1,noeud2R1,1,TypeArc.PLAT));
-        cheminR1.add(new Arc(noeud2R1,noeud3R1,1,TypeArc.ESCARPE));
-        cheminR1.add(new Arc(noeud3R1,newNoeudDepartR1,2,TypeArc.INNONDE));
+        cheminR1.add(new Arc(noeudDepartR1,noeud2R1,TypeArc.PLAT));
+        cheminR1.add(new Arc(noeud2R1,noeud3R1,TypeArc.ESCARPE));
+        cheminR1.add(new Arc(noeud3R1,newNoeudDepartR1,TypeArc.INNONDE));
         r2 = new Robot(noeudDepartR1);
-        cheminPlat.add(new Arc(noeudDepartR1,noeud2R1,1,TypeArc.PLAT));
+        cheminPlat.add(new Arc(noeudDepartR1,noeud2R1,TypeArc.PLAT));
         r2.setChemin(cheminPlat);
         r3 = new Robot(noeudDepartR3);
     }

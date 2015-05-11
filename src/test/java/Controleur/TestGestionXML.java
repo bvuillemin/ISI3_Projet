@@ -23,6 +23,7 @@ public class TestGestionXML {
 
     /**
      * Teste la lecture et l'écriture d'un fichier XML
+     *
      * @throws Exception si la lecture ou l'écriture ne marchent pas
      */
     @Test

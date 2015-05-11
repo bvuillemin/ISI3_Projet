@@ -22,6 +22,7 @@ import java.util.List;
 public class GestionXML {
     /**
      * Copie le contenu d'un fichier xml dans un graphe
+     *
      * @param repertoire répertoire du fichier XML
      * @return le graphe associé
      */
@@ -76,7 +77,8 @@ public class GestionXML {
 
     /**
      * Sauvegarde le contenu d'un graphe dans un XML
-     * @param g le graphe à sauvegarder
+     *
+     * @param g          le graphe à sauvegarder
      * @param repertoire le répertoire + le nom du nouveau chichier à sauvegarder
      * @throws Exception si la création du fichier ne marche pas
      */
