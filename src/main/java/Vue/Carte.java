@@ -19,6 +19,14 @@ public class Carte extends JPanel implements Observer {
     ArrayList<Robot> listRobot;
     ArrayList<Noeud> listNoeud;
     ArrayList<Arc> listArc;
+    Image background = null;
+    boolean customBackground = false;
+
+    public void setBackground(Image background) {
+        this.background = background;
+        customBackground = true;
+        this.repaint();
+    }
 
     public Carte() {
         listRobot = new ArrayList<Robot>();
@@ -26,10 +34,17 @@ public class Carte extends JPanel implements Observer {
         listArc = new ArrayList<Arc>();
     }
 
+    public void removeBackground() {
+        background = null;
+        customBackground = false;
+        this.repaint();
+    }
+
     public void reset() {
         listRobot.clear();
         listNoeud.clear();
         listArc.clear();
+        background = null;
     }
 
     public void addRobot(Robot robot) {
@@ -47,11 +62,20 @@ public class Carte extends JPanel implements Observer {
         this.repaint();
     }
 
-    public void paintComponent(Graphics g){
-        //Vous verrez cette phrase chaque fois que la méthode sera invoquée
-        System.out.println("Je suis exécutée !");
+    public void paintComponent(Graphics g) {
+        if (customBackground) {
+            Float ratio;
+            if (background.getWidth(null) > ((float) this.getWidth() /
+                    (float) this.getHeight() * (float) background.getHeight(null))) {
+                ratio = (float) background.getWidth(null) / (float) this.getWidth();
+            } else {
+                ratio = (float) background.getHeight(null) / (float) this.getHeight();
+            }
+            g.drawImage(background, 0, 0, Math.round((float) background.getWidth(null) / ratio),
+                    Math.round((float) background.getHeight(null) / ratio), null);
+        }
         for (Noeud n : listNoeud) {
-            if (n.getIntensite()==0) {
+            if (n.getIntensite() == 0) {
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 10, 10);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 11, 11);
             } else {
@@ -63,10 +87,10 @@ public class Carte extends JPanel implements Observer {
             }
         }
         for (Arc a : listArc) {
-            g.drawLine((int)a.getNoeud1().getX(),(int)a.getNoeud1().getY(),(int)a.getNoeud2().getX(),(int)a.getNoeud2().getY());
+            g.drawLine((int) a.getNoeud1().getX(), (int) a.getNoeud1().getY(), (int) a.getNoeud2().getX(), (int) a.getNoeud2().getY());
         }
         for (Robot r : listRobot) {
-            g.fillRoundRect((int)r.getNoeudActuel().getX()-10,(int)r.getNoeudActuel().getY()-10,10,10,0,0);
+            g.fillRoundRect((int) r.getNoeudActuel().getX() - 10, (int) r.getNoeudActuel().getY() - 10, 10, 10, 0, 0);
         }
     }
 
