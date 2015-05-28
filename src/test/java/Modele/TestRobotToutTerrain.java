@@ -6,6 +6,7 @@
 
 package Modele;
 
+import Vue.Carte;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -16,7 +17,7 @@ import org.junit.BeforeClass;
 public class TestRobotToutTerrain{
 
     RobotToutTerrain rp1;
-    private Noeud noeudDepartRP1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL);
+    private Noeud noeudDepartRP1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL, new Carte());
 
     public TestRobotToutTerrain() {
         rp1 = new RobotToutTerrain(noeudDepartRP1);

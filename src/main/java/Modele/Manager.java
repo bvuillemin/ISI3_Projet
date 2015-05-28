@@ -58,7 +58,7 @@ public class Manager {
             for (Robot robot : listRobots) {
                 distance=0.0;
                 //chemin = robot.plusCourtChemin(incendie);
-                chemin.add(new Arc(robot.getNoeudActuel(),new Noeud(0,1.0,1.0,TypeNoeud.INCENDIE),TypeArc.PLAT));
+                //chemin.add(new Arc(robot.getNoeudActuel(),new Noeud(0,1.0,1.0,TypeNoeud.INCENDIE),TypeArc.PLAT));
                 for (Arc arc : chemin) {
                     distance+=arc.getLongueur();
                 }
@@ -69,7 +69,7 @@ public class Manager {
                 }
             }
             robotChoisi.setChemin(cheminChoisi);
-            new Thread(robotChoisi).start();
+            //new Thread(robotChoisi).start();
             listRobots.remove(robotChoisi);
         }
     }

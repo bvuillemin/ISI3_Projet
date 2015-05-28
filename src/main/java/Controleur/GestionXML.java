@@ -4,6 +4,7 @@ package Controleur;
 import Modele.Arc;
 import Modele.Graphe;
 import Modele.Noeud;
+import Vue.Carte;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -33,6 +34,7 @@ public class GestionXML {
             Document document = (Document) builder.build(xmlFile);
             Element rootNode = document.getRootElement();
             Graphe g = new Graphe();
+            Carte c = new Carte();
             List list_noeud_xml = rootNode.getChildren("node");
             List list_arc_xml = rootNode.getChildren("edge");
             ArrayList<Noeud> liste_noeud = new ArrayList<Noeud>();
@@ -52,7 +54,7 @@ public class GestionXML {
                 x = Double.valueOf(noeud.getAttributeValue("x"));
                 y = Double.valueOf(noeud.getAttributeValue("y"));
                 type = noeud.getAttributeValue("type");
-                liste_noeud.add(new Noeud(id, x, y, type));
+                liste_noeud.add(new Noeud(id, x, y, type, c));
             }
             g.setListe_noeud(liste_noeud);
             for (int i = 0; i < list_arc_xml.size(); i++) {
@@ -62,7 +64,7 @@ public class GestionXML {
                 n1 = g.trouverNoeudParId(index_n1);
                 n2 = g.trouverNoeudParId(index_n2);
                 type = arc.getAttributeValue("type");
-                liste_arc.add(new Arc(n1, n2, type));
+                liste_arc.add(new Arc(n1, n2, type, c));
             }
             g.setListe_arcs(liste_arc);
             return g;

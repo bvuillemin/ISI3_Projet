@@ -1,14 +1,10 @@
 package Modele;
 
-/**
- * Created by benoitvuillemin on 06/05/2015.
- */
-enum TypeNoeud {
-    NORMAL,
-    INCENDIE
-}
+import Vue.Carte;
 
-public class Noeud {
+import java.util.Observable;
+
+public class Noeud extends Observable{
     private int id;
     private double x;
     private double y;
@@ -23,7 +19,7 @@ public class Noeud {
      * @param y    ordonnée du noeud
      * @param type type du noeud (String)
      */
-    public Noeud(int id, double x, double y, String type) {
+    public Noeud(int id, double x, double y, String type, Carte c) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -33,6 +29,7 @@ public class Noeud {
         } else {
             this.intensite = (int) (Math.random() * (9) + 1);
         }
+        this.addObserver(c);
     }
 
     /**
@@ -43,7 +40,7 @@ public class Noeud {
      * @param y    ordonnée du noeud
      * @param type type du noeud (TypeNoeud)
      */
-    public Noeud(int id, double x, double y, TypeNoeud type) {
+    public Noeud(int id, double x, double y, TypeNoeud type, Carte c) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -53,6 +50,7 @@ public class Noeud {
         } else {
             this.intensite = (int) (Math.random() * (9) + 1);
         }
+        this.addObserver(c);
     }
 
     public int getId() {
@@ -69,6 +67,8 @@ public class Noeud {
 
     public void setX(double x) {
         this.x = x;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public double getY() {
@@ -77,6 +77,8 @@ public class Noeud {
 
     public void setY(double y) {
         this.y = y;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public int getIntensite() {
@@ -90,6 +92,8 @@ public class Noeud {
         } else {
             this.type = TypeNoeud.NORMAL;
         }
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public TypeNoeud getType() {
@@ -103,6 +107,8 @@ public class Noeud {
         } else {
             this.intensite = (int) (Math.random() * (9) + 1);
         }
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public String toString() {

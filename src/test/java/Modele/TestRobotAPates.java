@@ -6,6 +6,7 @@
 
 package Modele;
 
+import Vue.Carte;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,11 +26,11 @@ public class TestRobotAPates {
     private Robot r2;
     private Robot r3;
 
-    private Noeud noeudDepartR1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL);
-    private Noeud noeud2R1 = new Noeud(0, 0.0, 1.0, TypeNoeud.NORMAL);
-    private Noeud noeud3R1 = new Noeud(0, 0.0, 2.0, TypeNoeud.NORMAL);
-    private Noeud newNoeudDepartR1 = new Noeud(0, 1.0, 0.0, TypeNoeud.NORMAL);
-    private Noeud noeudDepartR3 = new Noeud(0, 0.0, 0.0, TypeNoeud.INCENDIE);
+    private Noeud noeudDepartR1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL, new Carte());
+    private Noeud noeud2R1 = new Noeud(0, 0.0, 1.0, TypeNoeud.NORMAL, new Carte());
+    private Noeud noeud3R1 = new Noeud(0, 0.0, 2.0, TypeNoeud.NORMAL, new Carte());
+    private Noeud newNoeudDepartR1 = new Noeud(0, 1.0, 0.0, TypeNoeud.NORMAL, new Carte());
+    private Noeud noeudDepartR3 = new Noeud(0, 0.0, 0.0, TypeNoeud.INCENDIE, new Carte());
 
     private ArrayList<Arc> cheminR1 = new ArrayList<Arc>();
     private ArrayList<Arc> cheminPlat = new ArrayList<Arc>();

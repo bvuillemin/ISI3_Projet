@@ -10,6 +10,8 @@ public class Graphe {
     private ArrayList<Noeud> liste_noeuds;
 
     public Graphe() {
+        this.liste_arcs=new ArrayList<Arc>();
+        this.liste_noeuds=new ArrayList<Noeud>();
     }
 
     /**

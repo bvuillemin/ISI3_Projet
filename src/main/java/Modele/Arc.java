@@ -1,18 +1,13 @@
 package Modele;
 
+import Vue.Carte;
+
+import java.util.Observable;
+
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-/**
- * Created by benoitvuillemin on 06/05/2015.
- */
-enum TypeArc {
-    PLAT,
-    ESCARPE,
-    INNONDE
-}
-
-public class Arc {
+public class Arc extends Observable{
     private Noeud noeud1;
     private Noeud noeud2;
     private int longueur;
@@ -25,18 +20,20 @@ public class Arc {
      * @param noeud2 2eme noeud
      * @param type   type de l'arc
      */
-    public Arc(Noeud noeud1, Noeud noeud2, String type) {
+    public Arc(Noeud noeud1, Noeud noeud2, String type, Carte c) {
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.longueur = longueurArc(noeud1, noeud2);
         this.type = ArcStringToEnum(type);
+        this.addObserver(c);
     }
 
-    public Arc(Noeud noeud1, Noeud noeud2, TypeArc type) {
+    public Arc(Noeud noeud1, Noeud noeud2, TypeArc type, Carte c) {
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.longueur = longueurArc(noeud1, noeud2);
         this.type = type;
+        this.addObserver(c);
     }
 
     public Noeud getNoeud1() {

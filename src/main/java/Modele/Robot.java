@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
 /**
  * Created by thomascoquan on 06/05/2015.
  */
-public abstract class Robot extends Thread{
+public abstract class Robot extends Observable{
 
     protected Noeud noeudActuel;
     protected ArrayList<TypeArc> listTypeArcTraversable;
@@ -92,7 +93,6 @@ public abstract class Robot extends Thread{
      * traverser, on le signale et il s'arrête là.
      * S'il arrive au bout de chemin, il tente d'éteindre l'incendie s'y trouvant via la fonction eteindreIncendie
      */
-    @Override
     public void run() {
         Arc morceauChemin;
         if (chemin == null) {
