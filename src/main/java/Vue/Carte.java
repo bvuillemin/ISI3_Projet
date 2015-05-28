@@ -52,7 +52,6 @@ public class Carte extends JPanel implements Observer {
         System.out.println("Je suis exécutée !");
         for (Noeud n : listNoeud) {
             if (n.getIntensite()==0) {
-                g.setColor(Color.BLACK);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 10, 10);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 11, 11);
             } else {
@@ -60,10 +59,14 @@ public class Carte extends JPanel implements Observer {
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 10, 10);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 11, 11);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 12, 12);
+                g.setColor(Color.BLACK);
             }
         }
         for (Arc a : listArc) {
             g.drawLine((int)a.getNoeud1().getX(),(int)a.getNoeud1().getY(),(int)a.getNoeud2().getX(),(int)a.getNoeud2().getY());
+        }
+        for (Robot r : listRobot) {
+            g.fillRoundRect((int)r.getNoeudActuel().getX()-10,(int)r.getNoeudActuel().getY()-10,10,10,0,0);
         }
     }
 

@@ -1,6 +1,7 @@
 package Controleur;
 
 import Modele.*;
+import Modele.Robot;
 import Vue.Carte;
 import Vue.InterfacePrincipale;
 
@@ -18,6 +19,8 @@ public class Controleur implements ActionListener, MouseListener {
     Carte carte;
     InterfacePrincipale ip;
     Graphe g;
+    boolean premierClic=true;
+    Noeud noeudTmp;
 
     public void setCarte(Carte carte){
         this.carte=carte;
@@ -76,9 +79,26 @@ public class Controleur implements ActionListener, MouseListener {
             g.ajouterNoeud(n);
             carte.addNoeud(n);
         } else if (typeAjout==3) {
-
+            System.out.println("Nouvel Arc");
+            Noeud n = g.contientAppro(e.getX(),e.getY());
+            if (n!=null) {
+                if (premierClic != false) {
+                    noeudTmp=n;
+                    premierClic = false;
+                } else {
+                    Arc a = new Arc(noeudTmp,n,TypeArc.PLAT,carte);
+                    g.ajouterArc(a);
+                    carte.addArc(a);
+                    premierClic = true;
+                }
+            }
         } else if (typeAjout==4) {
-
+            System.out.println("Nouveau Robot");
+            Noeud n = g.contientAppro(e.getX(),e.getY());
+            if (n!=null) {
+                Robot r = new RobotAPates(n);
+                carte.addRobot(r);
+            }
         }
     }
 

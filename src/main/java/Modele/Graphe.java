@@ -105,4 +105,13 @@ public class Graphe {
         }
         return null;
     }
+
+    public Noeud contientAppro(int x, int y) {
+        for (Noeud n : liste_noeuds) {
+            if ((n.getX()-5<=x)&&(n.getX()+5>=x)&&(n.getY()-5<=y)&&(n.getY()+5>=y)) {
+                return n;
+            }
+        }
+        return null;
+    }
 }
