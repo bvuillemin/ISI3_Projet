@@ -1,9 +1,6 @@
 package Modele;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Dorian on 24/05/2015.
@@ -18,34 +15,63 @@ public class PlusCoursChemin {
 
     }
 
-    public ArrayList<Arc> ParcoursLargeur(Noeud position, Graphe graph){
+    public ArrayList<Arc> ParcoursLargeur(Noeud position, Graphe graph, Noeud goal){
         listArc = graph.getListe_arcs();
         actuel = position;
         listNoeud = new LinkedList<Noeud>();
         ArrayList<Arc> listArc_voisin = new ArrayList<Arc>();
-        ArrayList<Noeud> listMarque = new ArrayList<Noeud>();
+        LinkedHashMap<Noeud, ArrayList<Arc>> listArcOpti = new LinkedHashMap<Noeud, ArrayList<Arc>>();
+        LinkedHashMap<Noeud, Double> listMarque = new LinkedHashMap<Noeud, Double>();
         listNoeud.add(actuel);
-        listMarque.add(actuel);
+        listMarque.put(actuel, 0.0);
+        listArcOpti.put(actuel,new ArrayList<Arc>());
         while (!listNoeud.isEmpty()){
             actuel = listNoeud.removeFirst();
-            //afficher(s) ??
-            //on récupère la liste des voisins
-            for (Arc arc_voisin : listArc){
-                //noeud1 est source
-                if (arc_voisin.getNoeud1() == actuel) {
-                    listArc_voisin.add(arc_voisin);
+            if (actuel != goal) {
+                //afficher(s) ??
+                //on récupère la liste des voisins
+                for (Arc arc_voisin : listArc) {
+                    //noeud1 est source
+                    if ((arc_voisin.getNoeud1() == actuel) || (arc_voisin.getNoeud2() == actuel)) {
+                        listArc_voisin.add(arc_voisin);
+                    }
                 }
-            }
-            for (Arc e : listArc_voisin ){
-                //on regarde si l'element est marqué - noeud2 est tjrs destination
-                if (!listMarque.contains(e.getNoeud2())){
-                    listNoeud.add(e.getNoeud2());
-                    listMarque.add(e.getNoeud2());
+                for (Arc e : listArc_voisin) {
+                    //on regarde si l'element est marqué
+                    if (e.getNoeud1() == actuel) {
+                        if (!listMarque.containsKey(e.getNoeud2())) {
+                            listNoeud.add(e.getNoeud2());
+                            listMarque.put(e.getNoeud2(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listArcOpti.put(e.getNoeud2(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
+                            listArcOpti.get(e.getNoeud2()).add(e);
+                        } else if (listMarque.get(e.getNoeud2()) > (e.getLongueur() + listMarque.get(actuel))) {
+                            listNoeud.add(e.getNoeud2());
+                            listMarque.remove(e.getNoeud2());
+                            listMarque.put(e.getNoeud2(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listArcOpti.remove(e.getNoeud2());
+                            listArcOpti.put(e.getNoeud2(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
+                            listArcOpti.get(e.getNoeud2()).add(e);
+                        }
+                    } else if (e.getNoeud2() == actuel) {
+                        if (!listMarque.containsKey(e.getNoeud1())) {
+                            listNoeud.add(e.getNoeud1());
+                            listMarque.put(e.getNoeud1(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listArcOpti.put(e.getNoeud1(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
+                            listArcOpti.get(e.getNoeud1()).add(e);
+                        } else if (listMarque.get(e.getNoeud1()) > (e.getLongueur() + listMarque.get(actuel))) {
+                            listNoeud.add(e.getNoeud1());
+                            listMarque.remove(e.getNoeud1());
+                            listMarque.put(e.getNoeud1(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listArcOpti.remove(e.getNoeud1());
+                            listArcOpti.put(e.getNoeud1(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
+                            listArcOpti.get(e.getNoeud1()).add(e);
+                        }
+                    }
                 }
+                listArc_voisin.clear();
             }
-
         }
-        return null;
+        return listArcOpti.get(goal);
     }
 
 }

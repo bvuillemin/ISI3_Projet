@@ -1,5 +1,7 @@
 package Modele;
 
+import Vue.Carte;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observable;
@@ -22,9 +24,10 @@ public abstract class Robot extends Observable implements Runnable{
      * Robot est une classe abstraite.
      * @param noeudActuel
      */
-    public Robot(Noeud noeudActuel) {
+    public Robot(Noeud noeudActuel, Carte c) {
         this.noeudActuel = noeudActuel;
         capacite=1;
+        this.addObserver(c);
     }
 
     public Noeud getNoeudActuel() {
@@ -55,9 +58,8 @@ public abstract class Robot extends Observable implements Runnable{
             }
         } catch (NullPointerException e) {
             System.out.println("Absence d'arc traversable");
-        } finally {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -105,6 +107,10 @@ public abstract class Robot extends Observable implements Runnable{
                     }
                     noeudActuel = morceauChemin.getNoeud2();
                     chemin.remove(morceauChemin);
+                    System.out.println("Notif");
+                    this.setChanged();
+                    this.notifyObservers();
+                    System.out.println("Fin notif");
                     synchronized (this) {
                         this.wait(1000);
                     }

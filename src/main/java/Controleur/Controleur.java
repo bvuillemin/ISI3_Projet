@@ -23,6 +23,7 @@ public class Controleur implements ActionListener, MouseListener {
     Graphe g;
     boolean premierClic = true;
     Noeud noeudTmp;
+    Manager manager = new Manager();
 
     public void setCarte(Carte carte) {
         this.carte = carte;
@@ -31,6 +32,10 @@ public class Controleur implements ActionListener, MouseListener {
 
     public void setIp(InterfacePrincipale ip) {
         this.ip = ip;
+    }
+
+    public void setManager(Manager m) {
+        this.manager = m;
     }
 
     public void removeBackground(){
@@ -43,12 +48,15 @@ public class Controleur implements ActionListener, MouseListener {
 
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
-        g = new Graphe();
         if (c.equals("Nouveau graphe sans fond")) {
+            g = new Graphe();
             this.removeBackground();
             carte.setBackground(Color.WHITE);
         } else if (c.equals("Nouveau graphe avec un fond")) {
+            g = new Graphe();
             ip.setBackground();
+        } else if (c.equals("Lancer")) {
+            manager.affecterIncendie(carte,g);
         }
     }
 
@@ -56,12 +64,12 @@ public class Controleur implements ActionListener, MouseListener {
         int typeAjout = ip.typeAjout();
         if (typeAjout == 1) {
             System.out.println("Nouveau Noeud");
-            Noeud n = new Noeud(0, e.getX(), e.getY(), TypeNoeud.NORMAL, carte);
+            Noeud n = new Noeud(e.getX(), e.getY(), TypeNoeud.NORMAL, carte);
             g.ajouterNoeud(n);
             carte.addNoeud(n);
         } else if (typeAjout == 2) {
             System.out.println("Nouvel Incendie");
-            Noeud n = new Noeud(0, e.getX(), e.getY(), TypeNoeud.INCENDIE, carte);
+            Noeud n = new Noeud(e.getX(), e.getY(), TypeNoeud.INCENDIE, carte);
             g.ajouterNoeud(n);
             carte.addNoeud(n);
         } else if (typeAjout == 3) {
@@ -82,7 +90,7 @@ public class Controleur implements ActionListener, MouseListener {
             System.out.println("Nouveau Robot");
             Noeud n = g.contientAppro(e.getX(), e.getY());
             if (n != null) {
-                Robot r = new RobotAPates(n);
+                Robot r = new RobotAPates(n, carte);
                 carte.addRobot(r);
             }
         }

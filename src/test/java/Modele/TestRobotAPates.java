@@ -39,7 +39,7 @@ public class TestRobotAPates {
      * Test pour l'ensemble des fonctions de la classe abstraite Robot via sa classe fille RobotAPates
      */
     public TestRobotAPates() {
-        r0 = new RobotAPates(null);
+        //r0 = new RobotAPates(null);
     }
 
     @BeforeClass

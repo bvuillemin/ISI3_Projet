@@ -20,7 +20,7 @@ public class TestRobotToutTerrain{
     private Noeud noeudDepartRP1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL, new Carte());
 
     public TestRobotToutTerrain() {
-        rp1 = new RobotToutTerrain(noeudDepartRP1);
+        //rp1 = new RobotToutTerrain(noeudDepartRP1);
     }
 
     @BeforeClass

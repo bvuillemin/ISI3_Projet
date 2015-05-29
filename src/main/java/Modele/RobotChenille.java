@@ -1,5 +1,7 @@
 package Modele;
 
+import Vue.Carte;
+
 import java.util.ArrayList;
 
 /**
@@ -7,8 +9,8 @@ import java.util.ArrayList;
  */
 public class RobotChenille extends Robot {
 
-    public RobotChenille(Noeud noeudActuel) {
-        super(noeudActuel);
+    public RobotChenille(Noeud noeudActuel, Carte c) {
+        super(noeudActuel, c);
         listTypeArcTraversable=new ArrayList<TypeArc>();
         listTypeArcTraversable.add(TypeArc.INNONDE);
         listTypeArcTraversable.add(TypeArc.PLAT);

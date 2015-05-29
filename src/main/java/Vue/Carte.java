@@ -22,6 +22,14 @@ public class Carte extends JPanel implements Observer {
     Image background = null;
     boolean customBackground = false;
 
+    public ArrayList<Noeud> getNoeuds() {
+        return listNoeud;
+    }
+
+    public ArrayList<Robot> getRobots() {
+        return listRobot;
+    }
+
     public void setBackground(Image background) {
         this.background = background;
         customBackground = true;
@@ -95,6 +103,8 @@ public class Carte extends JPanel implements Observer {
     }
 
     public void update(Observable o, Object arg) {
+
+        System.out.println("test");
         this.repaint();
     }
 }

@@ -5,11 +5,32 @@ import Vue.Carte;
 import java.util.Observable;
 
 public class Noeud extends Observable{
+    private static int idActu = 0;
     private int id;
     private double x;
     private double y;
     private int intensite;
     private TypeNoeud type;
+
+    /**
+     * Créé un nouveau noeud
+     *
+     * @param x    abscisse du noeud
+     * @param y    ordonnée du noeud
+     * @param type type du noeud (String)
+     */
+    public Noeud(double x, double y, String type, Carte c) {
+        this.id = idActu++;
+        this.x = x;
+        this.y = y;
+        this.type = NoeudStringToEnum(type);
+        if (type.equals(TypeNoeud.NORMAL)) {
+            this.intensite = 0;
+        } else {
+            this.intensite = (int) (Math.random() * (9) + 1);
+        }
+        this.addObserver(c);
+    }
 
     /**
      * Créé un nouveau noeud
@@ -42,6 +63,26 @@ public class Noeud extends Observable{
      */
     public Noeud(int id, double x, double y, TypeNoeud type, Carte c) {
         this.id = id;
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        if (type.equals(TypeNoeud.NORMAL)) {
+            this.intensite = 0;
+        } else {
+            this.intensite = (int) (Math.random() * (9) + 1);
+        }
+        this.addObserver(c);
+    }
+
+    /**
+     * Créé un nouveau noeud
+     *
+     * @param x    abscisse du noeud
+     * @param y    ordonnée du noeud
+     * @param type type du noeud (TypeNoeud)
+     */
+    public Noeud(double x, double y, TypeNoeud type, Carte c) {
+        this.id = idActu++;
         this.x = x;
         this.y = y;
         this.type = type;
@@ -112,7 +153,7 @@ public class Noeud extends Observable{
     }
 
     public String toString() {
-        return "Noeud : id=" + id + " x=" + x + " y=" + y + " type=" + type;
+        return "\nNoeud : " + id + "\nx=" + x + "; y=" + y + "\ntype=" + type;
     }
 
     /**

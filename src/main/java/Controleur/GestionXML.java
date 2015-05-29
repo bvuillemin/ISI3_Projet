@@ -54,7 +54,7 @@ public class GestionXML {
                 x = Double.valueOf(noeud.getAttributeValue("x"));
                 y = Double.valueOf(noeud.getAttributeValue("y"));
                 type = noeud.getAttributeValue("type");
-                liste_noeud.add(new Noeud(id, x, y, type, c));
+                liste_noeud.add(new Noeud(x, y, type, c));
             }
             g.setListe_noeud(liste_noeud);
             for (int i = 0; i < list_arc_xml.size(); i++) {

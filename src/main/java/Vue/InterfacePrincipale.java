@@ -1,6 +1,7 @@
 package Vue;
 
 import Controleur.Controleur;
+import Modele.Manager;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -112,6 +113,7 @@ public class InterfacePrincipale extends JFrame {
         JPanel panelLancer = new JPanel();
         panelLancer.setPreferredSize(new Dimension(250, 100));
         JButton buttonLancer = new JButton("Lancer");
+        buttonLancer.addActionListener(c);
         buttonLancer.setPreferredSize(new Dimension(130, 25));
         panelLancer.add(buttonLancer);
         option.add(panelLancer, gbc);

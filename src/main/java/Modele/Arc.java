@@ -67,7 +67,7 @@ public class Arc extends Observable{
     }
 
     public String toString() {
-        return "Arc : nd1=" + noeud1 + " nd2=" + noeud2 + " type=" + type;
+        return "Arc : type  : "+type+"\nNoeud 1 :" + noeud1 + "\nNoeud 2 :" + noeud2;
     }
 
     /**

@@ -20,7 +20,7 @@ public class TestRobotChenille{
     private Noeud noeudDepartRP1 = new Noeud(0, 0.0, 0.0, TypeNoeud.NORMAL, new Carte());
 
     public TestRobotChenille() {
-        rc1 = new RobotChenille(noeudDepartRP1);
+        //rc1 = new RobotChenille(noeudDepartRP1);
     }
 
     @BeforeClass
