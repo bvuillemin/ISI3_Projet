@@ -9,10 +9,12 @@ public class Manager {
 
     ArrayList<Robot> listRobots;
     ArrayList<Noeud> listIncendies;
+    Graphe g;
 
-    public Manager() {
+    public Manager(Graphe g) {
         this.listRobots = null;
         this.listIncendies = null;
+        this.g=g;
     }
 
     public ArrayList<Robot> getListRobots() {
@@ -48,6 +50,7 @@ public class Manager {
     }
 
     public void affecterIncendie() {
+        PlusCoursChemin pcc = new PlusCoursChemin();
         ArrayList<Arc> chemin = new ArrayList<Arc>();
         double distance;
         double distanceMini=10000.0;
@@ -57,8 +60,7 @@ public class Manager {
             robotChoisi=listRobots.get(0);
             for (Robot robot : listRobots) {
                 distance=0.0;
-                //chemin = robot.plusCourtChemin(incendie);
-                //chemin.add(new Arc(robot.getNoeudActuel(),new Noeud(0,1.0,1.0,TypeNoeud.INCENDIE),TypeArc.PLAT));
+                chemin = pcc.ParcoursLargeur(robot.getNoeudActuel(),g);
                 for (Arc arc : chemin) {
                     distance+=arc.getLongueur();
                 }
@@ -69,7 +71,7 @@ public class Manager {
                 }
             }
             robotChoisi.setChemin(cheminChoisi);
-            //new Thread(robotChoisi).start();
+            new Thread(robotChoisi).start();
             listRobots.remove(robotChoisi);
         }
     }

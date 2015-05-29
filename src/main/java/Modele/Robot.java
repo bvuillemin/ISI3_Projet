@@ -1,15 +1,13 @@
 package Modele;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
 /**
  * Created by thomascoquan on 06/05/2015.
  */
-public abstract class Robot extends Observable{
+public abstract class Robot extends Observable implements Runnable{
 
     protected Noeud noeudActuel;
     protected ArrayList<TypeArc> listTypeArcTraversable;

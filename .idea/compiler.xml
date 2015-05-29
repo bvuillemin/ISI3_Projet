@@ -26,8 +26,8 @@
         <module name="ISI3_Projet" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ISI3_Projet" target="1.5" />
+    <bytecodeTargetLevel target="1.6">
+      <module name="ISI3_Projet" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

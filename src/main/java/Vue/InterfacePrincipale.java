@@ -39,9 +39,9 @@ public class InterfacePrincipale extends JFrame {
         if (rbAjoutNoeud.isSelected() != false) {
             return 1;
         } else if (rbAjoutArc.isSelected() != false) {
-            return 2;
-        } else if (rbAjoutIncendie.isSelected() != false) {
             return 3;
+        } else if (rbAjoutIncendie.isSelected() != false) {
+            return 2;
         } else if (rbAjoutRobot.isSelected() != false) {
             return 4;
         } else {
@@ -74,18 +74,18 @@ public class InterfacePrincipale extends JFrame {
          */
         JMenuBar menuBar = new JMenuBar();
         JMenu menuFichier = new JMenu("Fichier");
-        JMenuItem menuItemNouveau = new JMenuItem("Nouveau graphe");
+        JMenuItem menuItemNouveau = new JMenuItem("Nouveau graphe sans fond");
         menuItemNouveau.addActionListener(c);
         menuFichier.add(menuItemNouveau);
+        JMenuItem menuItemImage = new JMenuItem("Nouveau graphe avec un fond");
+        menuItemImage.addActionListener(c);
+        menuFichier.add(menuItemImage);
         JMenuItem menuItemCharger = new JMenuItem("Charger graphe");
         menuItemCharger.addActionListener(c);
         menuFichier.add(menuItemCharger);
         JMenuItem menuItemSauvegarder = new JMenuItem("Sauvegarder graphe");
         menuItemSauvegarder.addActionListener(c);
         menuFichier.add(menuItemSauvegarder);
-        JMenuItem menuItemImage = new JMenuItem("Charger une image");
-        menuItemImage.addActionListener(c);
-        menuFichier.add(menuItemImage);
         menuBar.add(menuFichier);
         this.setJMenuBar(menuBar);
 
@@ -177,6 +177,7 @@ public class InterfacePrincipale extends JFrame {
 
         this.setContentPane(content);
     }
+
     public class ImageFilter extends FileFilter {
         public String getExtension(File f) {
             String ext = null;

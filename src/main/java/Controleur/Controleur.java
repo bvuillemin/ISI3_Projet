@@ -44,36 +44,10 @@ public class Controleur implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
         g = new Graphe();
-        if (c.equals("Nouveau graphe")) {
+        if (c.equals("Nouveau graphe sans fond")) {
+            this.removeBackground();
             carte.setBackground(Color.WHITE);
-            Noeud n1 = new Noeud(0, 100, 100, TypeNoeud.NORMAL, carte);
-            g.ajouterNoeud(n1);
-            carte.addNoeud(n1);
-            Noeud n2 = new Noeud(0, 300, 100, TypeNoeud.NORMAL, carte);
-            g.ajouterNoeud(n2);
-            carte.addNoeud(n2);
-            Noeud n3 = new Noeud(0, 250, 200, TypeNoeud.NORMAL, carte);
-            g.ajouterNoeud(n3);
-            carte.addNoeud(n3);
-            Noeud n4 = new Noeud(0, 200, 140, TypeNoeud.NORMAL, carte);
-            g.ajouterNoeud(n4);
-            carte.addNoeud(n4);
-            Noeud n5 = new Noeud(0, 340, 120, TypeNoeud.NORMAL, carte);
-            g.ajouterNoeud(n5);
-            carte.addNoeud(n5);
-            Arc a1 = new Arc(n1, n2, TypeArc.PLAT, carte);
-            g.ajouterArc(a1);
-            carte.addArc(a1);
-            Arc a2 = new Arc(n2, n4, TypeArc.PLAT, carte);
-            g.ajouterArc(a2);
-            carte.addArc(a2);
-            Arc a3 = new Arc(n3, n5, TypeArc.PLAT, carte);
-            g.ajouterArc(a3);
-            carte.addArc(a3);
-            Arc a4 = new Arc(n2, n5, TypeArc.PLAT, carte);
-            g.ajouterArc(a4);
-            carte.addArc(a4);
-        } else if (c.equals("Charger une image")) {
+        } else if (c.equals("Nouveau graphe avec un fond")) {
             ip.setBackground();
         }
     }

@@ -14,13 +14,12 @@ public class PlusCoursChemin {
     LinkedList<Noeud> listNoeud;
     ArrayList<Arc> listArc;
 
-    public PlusCoursChemin (Graphe graph, Noeud positionRobot){
-        listArc = graph.getListe_arcs();
-        actuel = positionRobot;
-        ParcoursLargeur(actuel);
+    public PlusCoursChemin (){
+
     }
 
-    public void ParcoursLargeur(Noeud position ){
+    public ArrayList<Arc> ParcoursLargeur(Noeud position, Graphe graph){
+        listArc = graph.getListe_arcs();
         actuel = position;
         listNoeud = new LinkedList<Noeud>();
         ArrayList<Arc> listArc_voisin = new ArrayList<Arc>();
@@ -46,6 +45,7 @@ public class PlusCoursChemin {
             }
 
         }
+        return null;
     }
 
 }
