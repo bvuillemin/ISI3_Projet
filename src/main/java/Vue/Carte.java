@@ -19,6 +19,7 @@ public class Carte extends JPanel implements Observer {
     ArrayList<Robot> listRobot;
     ArrayList<Noeud> listNoeud;
     ArrayList<Arc> listArc;
+    Noeud noeudSelectionne;
     Image background = null;
     boolean customBackground = false;
 
@@ -33,6 +34,11 @@ public class Carte extends JPanel implements Observer {
     public void setBackground(Image background) {
         this.background = background;
         customBackground = true;
+        this.repaint();
+    }
+
+    public void setNoeudSelectionne(Noeud noeudSelectionne) {
+        this.noeudSelectionne = noeudSelectionne;
         this.repaint();
     }
 
@@ -53,6 +59,8 @@ public class Carte extends JPanel implements Observer {
         listNoeud.clear();
         listArc.clear();
         background = null;
+        customBackground = false;
+        this.repaint();
     }
 
     public void addRobot(Robot robot) {
@@ -72,6 +80,7 @@ public class Carte extends JPanel implements Observer {
 
     public void paintComponent(Graphics g) {
         if (customBackground) {
+            //Calcule les nouvelles dimensions de l'image de fond
             Float ratio;
             if (background.getWidth(null) > ((float) this.getWidth() /
                     (float) this.getHeight() * (float) background.getHeight(null))) {
@@ -79,31 +88,45 @@ public class Carte extends JPanel implements Observer {
             } else {
                 ratio = (float) background.getHeight(null) / (float) this.getHeight();
             }
-            g.drawImage(background, 0, 0, Math.round((float) background.getWidth(null) / ratio),
-                    Math.round((float) background.getHeight(null) / ratio), null);
+            int newWidth = Math.round((float) background.getWidth(null) / ratio);
+            int newHeight = Math.round((float) background.getHeight(null) / ratio);
+            //Réduit les dimensions de l'image et la centre
+            g.drawImage(background, (this.getWidth() - newWidth) / 2,
+                    (this.getHeight() - newHeight) / 2, newWidth, newHeight, null);
         }
         for (Noeud n : listNoeud) {
             if (n.getIntensite() == 0) {
+                if(n.equals(noeudSelectionne)){
+                    g.setColor(Color.GREEN);
+                }
+                else{
+                    g.setColor(Color.BLACK);
+                }
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 10, 10);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 11, 11);
             } else {
-                g.setColor(Color.RED);
+                if(n.equals(noeudSelectionne)){
+                    g.setColor(Color.GREEN);
+                }
+                else{
+                    g.setColor(Color.RED);
+                }
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 10, 10);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 11, 11);
                 g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 12, 12);
-                g.setColor(Color.BLACK);
             }
         }
         for (Arc a : listArc) {
+            g.setColor(Color.BLACK);
             g.drawLine((int) a.getNoeud1().getX(), (int) a.getNoeud1().getY(), (int) a.getNoeud2().getX(), (int) a.getNoeud2().getY());
         }
         for (Robot r : listRobot) {
+            g.setColor(Color.BLACK);
             g.fillRoundRect((int) r.getNoeudActuel().getX() - 10, (int) r.getNoeudActuel().getY() - 10, 10, 10, 0, 0);
         }
     }
 
     public void update(Observable o, Object arg) {
-
         System.out.println("test");
         this.repaint();
     }

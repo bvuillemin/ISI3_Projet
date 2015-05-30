@@ -49,11 +49,14 @@ public class Controleur implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
         if (c.equals("Nouveau graphe sans fond")) {
+            carte.reset();
             g = new Graphe();
             this.removeBackground();
             carte.setBackground(Color.WHITE);
         } else if (c.equals("Nouveau graphe avec un fond")) {
+            carte.reset();
             g = new Graphe();
+            carte.setBackground(Color.WHITE);
             ip.setBackground();
         } else if (c.equals("Lancer")) {
             manager.affecterIncendie(carte,g);
@@ -79,11 +82,13 @@ public class Controleur implements ActionListener, MouseListener {
                 if (premierClic != false) {
                     noeudTmp = n;
                     premierClic = false;
+                    carte.setNoeudSelectionne(n);
                 } else {
                     Arc a = new Arc(noeudTmp, n, TypeArc.PLAT, carte);
                     g.ajouterArc(a);
                     carte.addArc(a);
                     premierClic = true;
+                    carte.setNoeudSelectionne(null);
                 }
             }
         } else if (typeAjout == 4) {
