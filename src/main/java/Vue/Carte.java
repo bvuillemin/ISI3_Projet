@@ -58,8 +58,6 @@ public class Carte extends JPanel implements Observer {
         listRobot.clear();
         listNoeud.clear();
         listArc.clear();
-        background = null;
-        customBackground = false;
         this.repaint();
     }
 
@@ -80,8 +78,10 @@ public class Carte extends JPanel implements Observer {
 
     public void paintComponent(Graphics g) {
         if (customBackground) {
+
+            //Ce code permettait d'adapter les dimensions de l'image à l'interface. Supprimé pour que l'exemple marche
             //Calcule les nouvelles dimensions de l'image de fond
-            Float ratio;
+            /*Float ratio;
             if (background.getWidth(null) > ((float) this.getWidth() /
                     (float) this.getHeight() * (float) background.getHeight(null))) {
                 ratio = (float) background.getWidth(null) / (float) this.getWidth();
@@ -92,7 +92,9 @@ public class Carte extends JPanel implements Observer {
             int newHeight = Math.round((float) background.getHeight(null) / ratio);
             //Réduit les dimensions de l'image et la centre
             g.drawImage(background, (this.getWidth() - newWidth) / 2,
-                    (this.getHeight() - newHeight) / 2, newWidth, newHeight, null);
+                    (this.getHeight() - newHeight) / 2, newWidth, newHeight, null);*/
+
+            g.drawImage(background, 0, 0, background.getWidth(null), background.getHeight(null), null);
         }
         for (Noeud n : listNoeud) {
             if (n.getIntensite() == 0) {
@@ -102,8 +104,8 @@ public class Carte extends JPanel implements Observer {
                 else{
                     g.setColor(Color.BLACK);
                 }
-                g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 10, 10);
-                g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 11, 11);
+                g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 10, 10);
+                g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 11, 11);
             } else {
                 if(n.equals(noeudSelectionne)){
                     g.setColor(Color.GREEN);
@@ -111,18 +113,18 @@ public class Carte extends JPanel implements Observer {
                 else{
                     g.setColor(Color.RED);
                 }
-                g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 10, 10);
-                g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 11, 11);
-                g.drawOval((int) n.getX() - 5, (int) n.getY() - 5, 12, 12);
+                g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 10, 10);
+                g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 11, 11);
+                g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 12, 12);
             }
         }
         for (Arc a : listArc) {
             g.setColor(Color.BLACK);
-            g.drawLine((int) a.getNoeud1().getX(), (int) a.getNoeud1().getY(), (int) a.getNoeud2().getX(), (int) a.getNoeud2().getY());
+            g.drawLine((int) a.getNoeud1().getX() - 10, (int) a.getNoeud1().getY() - 10, (int) a.getNoeud2().getX() - 10, (int) a.getNoeud2().getY() - 10);
         }
         for (Robot r : listRobot) {
             g.setColor(Color.BLACK);
-            g.fillRoundRect((int) r.getNoeudActuel().getX() - 10, (int) r.getNoeudActuel().getY() - 10, 10, 10, 0, 0);
+            g.fillRoundRect((int) r.getNoeudActuel().getX() - 20, (int) r.getNoeudActuel().getY() - 20, 10, 10, 0, 0);
         }
     }
 

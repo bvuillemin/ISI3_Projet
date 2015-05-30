@@ -24,7 +24,7 @@ public class Noeud extends Observable{
         this.x = x;
         this.y = y;
         this.type = NoeudStringToEnum(type);
-        if (type.equals(TypeNoeud.NORMAL)) {
+        if (type.equals(TypeNoeud.NORMAL.toString())) {
             this.intensite = 0;
         } else {
             this.intensite = (int) (Math.random() * (9) + 1);
@@ -45,7 +45,7 @@ public class Noeud extends Observable{
         this.x = x;
         this.y = y;
         this.type = NoeudStringToEnum(type);
-        if (type.equals(TypeNoeud.NORMAL)) {
+        if (type.equals(TypeNoeud.NORMAL.toString())) {
             this.intensite = 0;
         } else {
             this.intensite = (int) (Math.random() * (9) + 1);

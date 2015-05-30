@@ -38,28 +38,44 @@ public class Controleur implements ActionListener, MouseListener {
         this.manager = m;
     }
 
-    public void removeBackground(){
+    public void setPath_XML(String path_XML) {
+        g = GestionXML.LectureXML(path_XML);
+        for (Noeud noeud : g.getListe_noeud()) {
+            carte.addNoeud(noeud);
+        }
+        for (Arc arc : g.getListe_arcs()) {
+            carte.addArc(arc);
+        }
+        this.carte.setBackground(Color.WHITE);
+    }
+
+    public void init() {
+        g = new Graphe();
+        this.carte.setBackground(Color.WHITE);
+    }
+
+    public void removeBackground() {
         carte.removeBackground();
     }
 
-    public void setBackground(Image i){
+    public void setBackground(Image i) {
         carte.setBackground(i);
     }
 
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
-        if (c.equals("Nouveau graphe sans fond")) {
+        if (c.equals("Nouveau graphe")) {
             carte.reset();
             g = new Graphe();
             this.removeBackground();
             carte.setBackground(Color.WHITE);
-        } else if (c.equals("Nouveau graphe avec un fond")) {
-            carte.reset();
-            g = new Graphe();
-            carte.setBackground(Color.WHITE);
+        } else if (c.equals("Charger une image de fond")) {
             ip.setBackground();
+        } else if (c.equals("Charger un graphe")) {
+            carte.reset();
+            ip.setGraphe();
         } else if (c.equals("Lancer")) {
-            manager.affecterIncendie(carte,g);
+            manager.affecterIncendie(carte, g);
         }
     }
 
@@ -67,17 +83,17 @@ public class Controleur implements ActionListener, MouseListener {
         int typeAjout = ip.typeAjout();
         if (typeAjout == 1) {
             System.out.println("Nouveau Noeud");
-            Noeud n = new Noeud(e.getX(), e.getY(), TypeNoeud.NORMAL, carte);
+            Noeud n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.NORMAL, carte);
             g.ajouterNoeud(n);
             carte.addNoeud(n);
         } else if (typeAjout == 2) {
             System.out.println("Nouvel Incendie");
-            Noeud n = new Noeud(e.getX(), e.getY(), TypeNoeud.INCENDIE, carte);
+            Noeud n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.INCENDIE, carte);
             g.ajouterNoeud(n);
             carte.addNoeud(n);
         } else if (typeAjout == 3) {
             System.out.println("Nouvel Arc");
-            Noeud n = g.contientAppro(e.getX(), e.getY());
+            Noeud n = g.contientAppro(e.getX() + 10, e.getY() + 10);
             if (n != null) {
                 if (premierClic != false) {
                     noeudTmp = n;
@@ -93,7 +109,7 @@ public class Controleur implements ActionListener, MouseListener {
             }
         } else if (typeAjout == 4) {
             System.out.println("Nouveau Robot");
-            Noeud n = g.contientAppro(e.getX(), e.getY());
+            Noeud n = g.contientAppro(e.getX() + 10, e.getY() + 10);
             if (n != null) {
                 Robot r = new RobotAPates(n, carte);
                 carte.addRobot(r);
