@@ -5,13 +5,11 @@ import Modele.Robot;
 import Vue.Carte;
 import Vue.InterfacePrincipale;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 
 /**
  * Created by thomascoquan on 28/05/2015.
@@ -49,6 +47,14 @@ public class Controleur implements ActionListener, MouseListener {
         this.carte.setBackground(Color.WHITE);
     }
 
+    public void savePath_XML(String path_XML) {
+        try {
+            GestionXML.SauvegardeXML(g, path_XML);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void init() {
         g = new Graphe();
         this.carte.setBackground(Color.WHITE);
@@ -74,6 +80,8 @@ public class Controleur implements ActionListener, MouseListener {
         } else if (c.equals("Charger un graphe")) {
             carte.reset();
             ip.setGraphe();
+        } else if (c.equals("Sauvegarder un graphe")) {
+            ip.saveGraphe();
         } else if (c.equals("Lancer")) {
             manager.affecterIncendie(carte, g);
         }
@@ -81,39 +89,95 @@ public class Controleur implements ActionListener, MouseListener {
 
     public void mouseClicked(MouseEvent e) {
         int typeAjout = ip.typeAjout();
-        if (typeAjout == 1) {
-            System.out.println("Nouveau Noeud");
-            Noeud n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.NORMAL, carte);
-            g.ajouterNoeud(n);
-            carte.addNoeud(n);
-        } else if (typeAjout == 2) {
-            System.out.println("Nouvel Incendie");
-            Noeud n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.INCENDIE, carte);
-            g.ajouterNoeud(n);
-            carte.addNoeud(n);
-        } else if (typeAjout == 3) {
-            System.out.println("Nouvel Arc");
-            Noeud n = g.contientAppro(e.getX() + 10, e.getY() + 10);
-            if (n != null) {
-                if (premierClic != false) {
-                    noeudTmp = n;
-                    premierClic = false;
-                    carte.setNoeudSelectionne(n);
-                } else {
-                    Arc a = new Arc(noeudTmp, n, TypeArc.PLAT, carte);
-                    g.ajouterArc(a);
-                    carte.addArc(a);
-                    premierClic = true;
-                    carte.setNoeudSelectionne(null);
+        Noeud n;
+        switch (typeAjout) {
+            case 1:
+                System.out.println("Nouveau Noeud");
+                n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.NORMAL, carte);
+                g.ajouterNoeud(n);
+                carte.addNoeud(n);
+                break;
+            case 2:
+                System.out.println("Nouvel Incendie");
+                n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.INCENDIE, carte);
+                g.ajouterNoeud(n);
+                carte.addNoeud(n);
+                break;
+            case 3:
+                System.out.println("Nouvel Arc Plat");
+                n = g.contientAppro(e.getX() + 10, e.getY() + 10);
+                if (n != null) {
+                    if (premierClic) {
+                        noeudTmp = n;
+                        premierClic = false;
+                        carte.setNoeudSelectionne(n);
+                    } else {
+                        Arc a = new Arc(noeudTmp, n, TypeArc.PLAT, carte);
+                        g.ajouterArc(a);
+                        carte.addArc(a);
+                        premierClic = true;
+                        carte.setNoeudSelectionne(null);
+                    }
                 }
-            }
-        } else if (typeAjout == 4) {
-            System.out.println("Nouveau Robot");
-            Noeud n = g.contientAppro(e.getX() + 10, e.getY() + 10);
-            if (n != null) {
-                Robot r = new RobotAPates(n, carte);
-                carte.addRobot(r);
-            }
+                break;
+            case 4:
+                System.out.println("Nouvel Arc Escarpé");
+                n = g.contientAppro(e.getX() + 10, e.getY() + 10);
+                if (n != null) {
+                    if (premierClic) {
+                        noeudTmp = n;
+                        premierClic = false;
+                        carte.setNoeudSelectionne(n);
+                    } else {
+                        Arc a = new Arc(noeudTmp, n, TypeArc.ESCARPE, carte);
+                        g.ajouterArc(a);
+                        carte.addArc(a);
+                        premierClic = true;
+                        carte.setNoeudSelectionne(null);
+                    }
+                }
+                break;
+            case 5:
+                System.out.println("Nouvel Arc Innondé");
+                n = g.contientAppro(e.getX() + 10, e.getY() + 10);
+                if (n != null) {
+                    if (premierClic) {
+                        noeudTmp = n;
+                        premierClic = false;
+                        carte.setNoeudSelectionne(n);
+                    } else {
+                        Arc a = new Arc(noeudTmp, n, TypeArc.INNONDE, carte);
+                        g.ajouterArc(a);
+                        carte.addArc(a);
+                        premierClic = true;
+                        carte.setNoeudSelectionne(null);
+                    }
+                }
+                break;
+            case 6:
+                System.out.println("Nouveau Robot à Pattes");
+                n = g.contientAppro(e.getX() + 10, e.getY() + 10);
+                if (n != null) {
+                    Robot r = new RobotAPates(n, carte);
+                    carte.addRobot(r);
+                }
+                break;
+            case 7:
+                System.out.println("Nouveau Robot Chenille");
+                n = g.contientAppro(e.getX() + 10, e.getY() + 10);
+                if (n != null) {
+                    Robot r = new RobotChenille(n, carte);
+                    carte.addRobot(r);
+                }
+                break;
+            case 8:
+                System.out.println("Nouveau Robot Tout Terrain");
+                n = g.contientAppro(e.getX() + 10, e.getY() + 10);
+                if (n != null) {
+                    Robot r = new RobotToutTerrain(n, carte);
+                    carte.addRobot(r);
+                }
+                break;
         }
     }
 

@@ -3,8 +3,7 @@ package Vue;
 import javax.swing.*;
 import java.awt.*;
 
-import Modele.Arc;
-import Modele.Noeud;
+import Modele.*;
 import Modele.Robot;
 
 import java.util.ArrayList;
@@ -21,6 +20,9 @@ public class Carte extends JPanel implements Observer {
     ArrayList<Arc> listArc;
     Noeud noeudSelectionne;
     Image background = null;
+    ImageIcon rpattes = new ImageIcon("src/main/resources/rpattes.png");
+    ImageIcon rchenille = new ImageIcon("src/main/resources/rchenille.png");
+    ImageIcon rtt = new ImageIcon("src/main/resources/rtt.png");
     boolean customBackground = false;
 
     public ArrayList<Noeud> getNoeuds() {
@@ -98,19 +100,17 @@ public class Carte extends JPanel implements Observer {
         }
         for (Noeud n : listNoeud) {
             if (n.getIntensite() == 0) {
-                if(n.equals(noeudSelectionne)){
+                if (n.equals(noeudSelectionne)) {
                     g.setColor(Color.GREEN);
-                }
-                else{
+                } else {
                     g.setColor(Color.BLACK);
                 }
                 g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 10, 10);
                 g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 11, 11);
             } else {
-                if(n.equals(noeudSelectionne)){
+                if (n.equals(noeudSelectionne)) {
                     g.setColor(Color.GREEN);
-                }
-                else{
+                } else {
                     g.setColor(Color.RED);
                 }
                 g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 10, 10);
@@ -119,12 +119,31 @@ public class Carte extends JPanel implements Observer {
             }
         }
         for (Arc a : listArc) {
-            g.setColor(Color.BLACK);
-            g.drawLine((int) a.getNoeud1().getX() - 10, (int) a.getNoeud1().getY() - 10, (int) a.getNoeud2().getX() - 10, (int) a.getNoeud2().getY() - 10);
+            switch (a.getType()) {
+                case ESCARPE:
+                    g.setColor(Color.ORANGE);
+                    break;
+                case INNONDE:
+                    g.setColor(Color.BLUE);
+                    break;
+                default:
+                    g.setColor(Color.BLACK);
+                    break;
+            }
+            g.drawLine((int) a.getNoeud1().getX() - 10, (int) a.getNoeud1().getY() - 10,
+                    (int) a.getNoeud2().getX() - 10, (int) a.getNoeud2().getY() - 10);
         }
         for (Robot r : listRobot) {
-            g.setColor(Color.BLACK);
-            g.fillRoundRect((int) r.getNoeudActuel().getX() - 20, (int) r.getNoeudActuel().getY() - 20, 10, 10, 0, 0);
+            if (r instanceof RobotAPates) {
+                g.drawImage(rpattes.getImage(), (int) r.getNoeudActuel().getX() - 10, (int) r.getNoeudActuel().getY() - 10,
+                        20, 20, null);
+            } else if (r instanceof RobotChenille) {
+                g.drawImage(rchenille.getImage(), (int) r.getNoeudActuel().getX() - 10, (int) r.getNoeudActuel().getY() - 10,
+                        20, 20, null);
+            } else {
+                g.drawImage(rtt.getImage(), (int) r.getNoeudActuel().getX() - 10, (int) r.getNoeudActuel().getY() - 10,
+                        20, 20, null);
+            }
         }
     }
 

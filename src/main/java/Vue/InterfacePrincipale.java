@@ -18,6 +18,8 @@ public class InterfacePrincipale extends JFrame {
     JRadioButton rbAjoutNoeud;
     JRadioButton rbAjoutArc;
     JRadioButton rbAjoutRobot;
+    JComboBox listTypeArc;
+    JComboBox listRobot;
     JFileChooser chooser;
     int OPTIONS_WIDTH = 200;
     int OPTION_HEIGHT = 25;
@@ -42,14 +44,28 @@ public class InterfacePrincipale extends JFrame {
     }
 
     public int typeAjout() {
-        if (rbAjoutNoeud.isSelected() != false) {
+        if (rbAjoutNoeud.isSelected()) {
             return 1;
-        } else if (rbAjoutArc.isSelected() != false) {
-            return 3;
-        } else if (rbAjoutIncendie.isSelected() != false) {
+        } else if (rbAjoutIncendie.isSelected()) {
             return 2;
-        } else if (rbAjoutRobot.isSelected() != false) {
-            return 4;
+        } else if (rbAjoutArc.isSelected()) {
+            if (listTypeArc.getSelectedIndex() == 0)
+                return 3;
+            else if (listTypeArc.getSelectedIndex() == 1)
+                return 4;
+            else if (listTypeArc.getSelectedIndex() == 2)
+                return 5;
+            else
+                return -1;
+        } else if (rbAjoutRobot.isSelected()) {
+            if (listRobot.getSelectedIndex() == 0)
+                return 6;
+            else if (listRobot.getSelectedIndex() == 1)
+                return 7;
+            else if (listRobot.getSelectedIndex() == 2)
+                return 8;
+            else
+                return -1;
         } else {
             return -1;
         }
@@ -57,9 +73,8 @@ public class InterfacePrincipale extends JFrame {
 
     public void setBackground() {
         chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileFilter imageFilter = new ImageFilter();
+        FileFilter imageFilter = new UtilitairesVue.ImageFilter();
 
         chooser.addChoosableFileFilter(imageFilter);
         chooser.setAcceptAllFileFilterUsed(false);
@@ -75,7 +90,6 @@ public class InterfacePrincipale extends JFrame {
 
     public void setGraphe() {
         chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         FileFilter xmlFilter = new FileNameExtensionFilter("Fichiers XML", "xml");
 
@@ -85,6 +99,19 @@ public class InterfacePrincipale extends JFrame {
             File file = chooser.getSelectedFile();
             String sname = file.getAbsolutePath();
             c.setPath_XML(sname);
+        }
+    }
+
+    public void saveGraphe() {
+        chooser = new JFileChooser();
+        int userSelection = chooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = chooser.getSelectedFile();
+            if (fileToSave.getAbsolutePath().endsWith(".xml"))
+                c.savePath_XML(fileToSave.getAbsolutePath());
+            else
+                c.savePath_XML(fileToSave.getAbsolutePath() + ".xml");
         }
     }
 
@@ -198,7 +225,7 @@ public class InterfacePrincipale extends JFrame {
         gbc.gridy = 7;
         gbc.gridwidth = 3;
         gbc.gridheight = 1;
-        JComboBox listTypeArc = new JComboBox();
+        listTypeArc = new JComboBox();
         listTypeArc.setPreferredSize(new Dimension(OPTIONS_WIDTH * 8 / 10, OPTION_HEIGHT));
         listTypeArc.addItem("Chemin plat");
         listTypeArc.addItem("Chemin escarpé");
@@ -226,7 +253,7 @@ public class InterfacePrincipale extends JFrame {
         gbc.gridy = 10;
         gbc.gridwidth = 3;
         gbc.gridheight = 1;
-        JComboBox listRobot = new JComboBox();
+        listRobot = new JComboBox();
         listRobot.setPreferredSize(new Dimension(OPTIONS_WIDTH * 8 / 10, OPTION_HEIGHT));
         listRobot.addItem("Robot à pattes");
         listRobot.addItem("Robot chenille");
@@ -253,43 +280,4 @@ public class InterfacePrincipale extends JFrame {
         content.add(option, BorderLayout.WEST);
         this.setContentPane(content);
     }
-
-    public class ImageFilter extends FileFilter {
-        public String getExtension(File f) {
-            String ext = null;
-            String s = f.getName();
-            int i = s.lastIndexOf('.');
-
-            if (i > 0 && i < s.length() - 1) {
-                ext = s.substring(i + 1).toLowerCase();
-            }
-            return ext;
-        }
-
-        //Accept all directories and all gif, jpg, tiff, or png files.
-        public boolean accept(File f) {
-            if (f.isDirectory()) {
-                return true;
-            }
-
-            String extension = getExtension(f);
-            if (extension != null) {
-                if (extension.equals("gif") ||
-                        extension.equals("jpeg") ||
-                        extension.equals("jpg") ||
-                        extension.equals("png")) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            return false;
-        }
-
-        //The description of this filter
-        public String getDescription() {
-            return "Images";
-        }
-    }
-
 }
