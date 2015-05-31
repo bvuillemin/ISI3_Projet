@@ -99,9 +99,14 @@ public class Controleur implements ActionListener, MouseListener {
                 break;
             case 2:
                 System.out.println("Nouvel Incendie");
-                n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.INCENDIE, carte);
-                g.ajouterNoeud(n);
-                carte.addNoeud(n);
+                n = g.contientAppro(e.getX() + 10, e.getY() + 10);
+                if (n==null) {
+                    n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.INCENDIE, carte);
+                    g.ajouterNoeud(n);
+                    carte.addNoeud(n);
+                } else {
+                    n.setIntensite((int) (Math.random() * (9) + 1));
+                }
                 break;
             case 3:
                 System.out.println("Nouvel Arc Plat");
