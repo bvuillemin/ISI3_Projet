@@ -48,9 +48,11 @@ public class Graphe {
      */
     public void supprimerNoeud(Noeud n) {
         liste_noeuds.remove(n);
-        for (Arc arc : liste_arcs) {
+        for (int i=0; i<liste_arcs.size(); i++) {
+            Arc arc = liste_arcs.get(i);
             if (arc.getNoeud1() == n || arc.getNoeud2() == n) {
                 liste_arcs.remove(arc);
+                i--;
             }
         }
     }
