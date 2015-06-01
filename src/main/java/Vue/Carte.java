@@ -23,6 +23,7 @@ public class Carte extends JPanel implements Observer {
     ImageIcon rpattes = new ImageIcon("src/main/resources/rpattes.png");
     ImageIcon rchenille = new ImageIcon("src/main/resources/rchenille.png");
     ImageIcon rtt = new ImageIcon("src/main/resources/rtt.png");
+    ImageIcon incendie = new ImageIcon("src/main/resources/incendie.png");
     boolean customBackground = false;
 
     public ArrayList<Noeud> getNoeuds() {
@@ -113,6 +114,9 @@ public class Carte extends JPanel implements Observer {
                 } else {
                     g.setColor(Color.RED);
                 }
+                int taille = n.getIntensite() * 10;
+                g.drawImage(incendie.getImage(), (int) n.getX() - taille / 2 - 10, (int) n.getY() - taille / 2 - 10,
+                        taille, taille, null);
                 g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 10, 10);
                 g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 11, 11);
                 g.drawOval((int) n.getX() - 15, (int) n.getY() - 15, 12, 12);
