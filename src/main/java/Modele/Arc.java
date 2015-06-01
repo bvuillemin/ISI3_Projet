@@ -10,7 +10,7 @@ import static java.lang.Math.sqrt;
 public class Arc extends Observable{
     private Noeud noeud1;
     private Noeud noeud2;
-    private int longueur;
+    private double longueur;
     private TypeArc type;
 
     /**
@@ -21,6 +21,9 @@ public class Arc extends Observable{
      * @param type   type de l'arc
      */
     public Arc(Noeud noeud1, Noeud noeud2, String type, Carte c) {
+        if ((noeud1==null)||(noeud2==null)) {
+            throw new NullPointerException("Initialisation avec un noeud nul");
+        }
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.longueur = longueurArc(noeud1, noeud2);
@@ -29,6 +32,9 @@ public class Arc extends Observable{
     }
 
     public Arc(Noeud noeud1, Noeud noeud2, TypeArc type, Carte c) {
+        if ((noeud1==null)||(noeud2==null)) {
+            throw new NullPointerException("Initialisation avec un noeud nul");
+        }
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.longueur = longueurArc(noeud1, noeud2);
@@ -54,7 +60,7 @@ public class Arc extends Observable{
         this.longueur = longueurArc(noeud1, noeud2);
     }
 
-    public int getLongueur() {
+    public double getLongueur() {
         return longueur;
     }
 
@@ -80,6 +86,7 @@ public class Arc extends Observable{
      * @throws IllegalArgumentException si le string de départ ne correspond à rien
      */
     private TypeArc ArcStringToEnum(String s) {
+        s=s.toUpperCase();
         TypeArc t;
         if (s.equals("PLAT")) {
             t = TypeArc.PLAT;
@@ -88,7 +95,7 @@ public class Arc extends Observable{
         } else if (s.equals("INNONDE")) {
             t = TypeArc.INNONDE;
         } else {
-            throw new IllegalArgumentException("String de typeArc invalide" + s);
+            throw new IllegalArgumentException("String de typeArc invalide : " + s);
         }
         return t;
     }
@@ -118,7 +125,21 @@ public class Arc extends Observable{
      * @param n2 noeud 2
      * @return la longueur entre les deux noeuds
      */
-    private int longueurArc(Noeud n1, Noeud n2) {
-        return (int) sqrt(pow((n1.getX() - n2.getX()), 2) + pow((n1.getY() - n2.getY()), 2));
+    private double longueurArc(Noeud n1, Noeud n2) {
+        return sqrt(pow((n1.getX() - n2.getX()), 2) + pow((n1.getY() - n2.getY()), 2));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Arc arc = (Arc) o;
+
+        if (noeud1 != null ? !noeud1.equals(arc.noeud1) : arc.noeud1 != null) return false;
+        if (noeud2 != null ? !noeud2.equals(arc.noeud2) : arc.noeud2 != null) return false;
+        if (type != arc.type) return false;
+
+        return true;
     }
 }
