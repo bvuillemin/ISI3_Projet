@@ -31,7 +31,6 @@ public class PlusCoursChemin {
                 //afficher(s) ??
                 //on récupère la liste des voisins
                 for (Arc arc_voisin : listArc) {
-                    //noeud1 est source
                     if (((arc_voisin.getNoeud1() == actuel) || (arc_voisin.getNoeud2() == actuel))&&(robot.capablePasser(arc_voisin.getType())!=false)) {
                         listArc_voisin.add(arc_voisin);
                     }

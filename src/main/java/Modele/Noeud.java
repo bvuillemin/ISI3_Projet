@@ -20,6 +20,9 @@ public class Noeud extends Observable{
      * @param type type du noeud (String)
      */
     public Noeud(double x, double y, String type, Carte c) {
+        if (c==null) {
+            throw new NullPointerException("Carte null");
+        }
         this.id = idActu++;
         this.x = x;
         this.y = y;
@@ -41,6 +44,9 @@ public class Noeud extends Observable{
      * @param type type du noeud (String)
      */
     public Noeud(int id, double x, double y, String type, Carte c) {
+        if (c==null) {
+            throw new NullPointerException("Carte null");
+        }
         this.id = id;
         this.x = x;
         this.y = y;
@@ -62,6 +68,9 @@ public class Noeud extends Observable{
      * @param type type du noeud (TypeNoeud)
      */
     public Noeud(int id, double x, double y, TypeNoeud type, Carte c) {
+        if (c==null) {
+            throw new NullPointerException("Carte null");
+        }
         this.id = id;
         this.x = x;
         this.y = y;
@@ -82,6 +91,9 @@ public class Noeud extends Observable{
      * @param type type du noeud (TypeNoeud)
      */
     public Noeud(double x, double y, TypeNoeud type, Carte c) {
+        if (c==null) {
+            throw new NullPointerException("Carte null");
+        }
         this.id = idActu++;
         this.x = x;
         this.y = y;

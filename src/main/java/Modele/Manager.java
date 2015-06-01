@@ -10,6 +10,9 @@ import java.util.ArrayList;
 public class Manager {
 
     public void affecterIncendie(Carte carte, Graphe g) {
+        if (carte==null) {
+            throw new NullPointerException("Carte null");
+        }
         ArrayList<Noeud> listIncendies = (ArrayList<Noeud>) carte.getNoeuds().clone();
         Noeud n;
         for (int i=0; i<listIncendies.size(); i++) {
