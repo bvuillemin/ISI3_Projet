@@ -64,6 +64,8 @@ public class Arc extends Observable{
 
     public void setType(TypeArc type) {
         this.type = type;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public String toString() {

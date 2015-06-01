@@ -27,7 +27,6 @@ public class Manager {
         Robot robotChoisi;
         ArrayList<Arc> cheminChoisi = null;
         for (Noeud incendie : listIncendies) {
-            System.out.println(incendie);
             if (listRobots.isEmpty()==false) {
                 distanceMini=Double.MAX_VALUE;
                 robotChoisi=null;

@@ -148,7 +148,6 @@ public class Carte extends JPanel implements Observer {
     }
 
     public void update(Observable o, Object arg) {
-        System.out.println("test");
         this.repaint();
     }
 }

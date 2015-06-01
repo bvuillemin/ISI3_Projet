@@ -18,16 +18,22 @@ public abstract class Robot extends Observable implements Runnable{
     protected Graphe graphe;
     protected Map dijkstra;
     protected int capacite;
+    protected boolean occupe;
 
     /**
      * Constructeur d'un Robot
      * Robot est une classe abstraite.
      * @param noeudActuel
      */
-    public Robot(Noeud noeudActuel, Carte c) {
+    public Robot(Noeud noeudActuel, Carte c, Graphe g) {
         this.noeudActuel = noeudActuel;
         capacite=1;
+        this.graphe=g;
         this.addObserver(c);
+    }
+
+    public boolean isOccupe() {
+        return occupe;
     }
 
     public Noeud getNoeudActuel() {
@@ -70,9 +76,19 @@ public abstract class Robot extends Observable implements Runnable{
      */
     public void eteindreIncendie() throws InterruptedException {
         try {
+            int probaInondation = 3;
+            int rand=0;
             if (noeudActuel.getType() == TypeNoeud.INCENDIE) {
                 while (noeudActuel.getIntensite() != 0) {
                     noeudActuel.setIntensite(noeudActuel.getIntensite() - capacite);
+                    for (Arc arc_voisin : graphe.getListe_arcs()) {
+                        if (((arc_voisin.getNoeud1() == noeudActuel) || (arc_voisin.getNoeud2() == noeudActuel))&&(arc_voisin.getType()!=TypeArc.INNONDE)) {
+                            rand = (int) (Math.random() * (9) + 1);
+                            if (rand<probaInondation) {
+                                arc_voisin.setType(TypeArc.INNONDE);
+                            }
+                        }
+                    }
                     synchronized (this) {
                         this.wait(1000);
                     }
@@ -94,6 +110,7 @@ public abstract class Robot extends Observable implements Runnable{
      * S'il arrive au bout de chemin, il tente d'éteindre l'incendie s'y trouvant via la fonction eteindreIncendie
      */
     public void run() {
+        occupe = true;
         Arc morceauChemin;
         if (chemin == null) {
             System.out.println("Pas de chemin à suivre.");
@@ -127,5 +144,6 @@ public abstract class Robot extends Observable implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        occupe = false;
     }
 }

@@ -166,7 +166,7 @@ public class Controleur implements ActionListener, MouseListener {
                 System.out.println("Nouveau Robot à Pattes");
                 n = g.contientAppro(e.getX() + 10, e.getY() + 10);
                 if (n != null) {
-                    Robot r = new RobotAPates(n, carte);
+                    Robot r = new RobotAPates(n, carte, g);
                     carte.addRobot(r);
                 }
                 break;
@@ -174,7 +174,7 @@ public class Controleur implements ActionListener, MouseListener {
                 System.out.println("Nouveau Robot Chenille");
                 n = g.contientAppro(e.getX() + 10, e.getY() + 10);
                 if (n != null) {
-                    Robot r = new RobotChenille(n, carte);
+                    Robot r = new RobotChenille(n, carte, g);
                     carte.addRobot(r);
                 }
                 break;
@@ -182,7 +182,7 @@ public class Controleur implements ActionListener, MouseListener {
                 System.out.println("Nouveau Robot Tout Terrain");
                 n = g.contientAppro(e.getX() + 10, e.getY() + 10);
                 if (n != null) {
-                    Robot r = new RobotToutTerrain(n, carte);
+                    Robot r = new RobotToutTerrain(n, carte, g);
                     carte.addRobot(r);
                 }
                 break;
