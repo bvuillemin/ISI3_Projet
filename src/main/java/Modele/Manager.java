@@ -23,26 +23,38 @@ public class Manager {
         PlusCoursChemin pcc = new PlusCoursChemin();
         ArrayList<Arc> chemin;
         double distance;
-        double distanceMini=10000.0;
+        double distanceMini;
         Robot robotChoisi;
         ArrayList<Arc> cheminChoisi = null;
         for (Noeud incendie : listIncendies) {
-            robotChoisi=listRobots.get(0);
-            for (Robot robot : listRobots) {
-                distance=0.0;
-                chemin = pcc.ParcoursLargeur(robot.getNoeudActuel(), g, incendie);
-                for (Arc arc : chemin) {
-                    distance+=arc.getLongueur();
+            System.out.println(incendie);
+            if (listRobots.isEmpty()==false) {
+                distanceMini=Double.MAX_VALUE;
+                robotChoisi=null;
+                for (Robot robot : listRobots) {
+                    distance = 0.0;
+                    chemin = pcc.ParcoursLargeur(robot, g, incendie);
+                    if (chemin != null) {
+                        for (Arc arc : chemin) {
+                            distance += arc.getLongueur();
+                        }
+                        if (distance < distanceMini) {
+                            distanceMini = distance;
+                            robotChoisi = robot;
+                            cheminChoisi = chemin;
+                        }
+                    }
                 }
-                if (distance<distanceMini) {
-                    distanceMini=distance;
-                    robotChoisi=robot;
-                    cheminChoisi=chemin;
+                if (robotChoisi!=null) {
+                    robotChoisi.setChemin(cheminChoisi);
+                    new Thread(robotChoisi).start();
+                    listRobots.remove(robotChoisi);
+                } else {
+                    System.out.println("Pas de robot disponible pour cet incendie");
                 }
+            } else {
+                return;
             }
-            robotChoisi.setChemin(cheminChoisi);
-            new Thread(robotChoisi).start();
-            listRobots.remove(robotChoisi);
         }
     }
 }

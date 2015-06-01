@@ -15,9 +15,9 @@ public class PlusCoursChemin {
 
     }
 
-    public ArrayList<Arc> ParcoursLargeur(Noeud position, Graphe graph, Noeud goal){
+    public ArrayList<Arc> ParcoursLargeur(Robot robot, Graphe graph, Noeud goal){
         listArc = graph.getListe_arcs();
-        actuel = position;
+        actuel = robot.noeudActuel;
         listNoeud = new LinkedList<Noeud>();
         ArrayList<Arc> listArc_voisin = new ArrayList<Arc>();
         LinkedHashMap<Noeud, ArrayList<Arc>> listArcOpti = new LinkedHashMap<Noeud, ArrayList<Arc>>();
@@ -32,7 +32,7 @@ public class PlusCoursChemin {
                 //on récupère la liste des voisins
                 for (Arc arc_voisin : listArc) {
                     //noeud1 est source
-                    if ((arc_voisin.getNoeud1() == actuel) || (arc_voisin.getNoeud2() == actuel)) {
+                    if (((arc_voisin.getNoeud1() == actuel) || (arc_voisin.getNoeud2() == actuel))&&(robot.capablePasser(arc_voisin.getType())!=false)) {
                         listArc_voisin.add(arc_voisin);
                     }
                 }

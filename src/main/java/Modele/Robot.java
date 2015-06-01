@@ -101,16 +101,19 @@ public abstract class Robot extends Observable implements Runnable{
             while (chemin.isEmpty() == false) {
                 try {
                     morceauChemin = chemin.get(0);
+                    System.out.println(morceauChemin);
                     if (this.capablePasser(morceauChemin.getType())==false) {
                         System.out.println("Impossible de passer");
                         return;
                     }
-                    noeudActuel = morceauChemin.getNoeud2();
+                    if (noeudActuel==morceauChemin.getNoeud1()) {
+                        noeudActuel = morceauChemin.getNoeud2();
+                    } else {
+                        noeudActuel = morceauChemin.getNoeud1();
+                    }
                     chemin.remove(morceauChemin);
-                    System.out.println("Notif");
                     this.setChanged();
                     this.notifyObservers();
-                    System.out.println("Fin notif");
                     synchronized (this) {
                         this.wait(1000);
                     }
