@@ -7,21 +7,33 @@ import java.util.Observable;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Arc extends Observable{
+public class Arc extends Observable {
+    /**
+     * Permier Noeud de l'Arc
+     */
     private Noeud noeud1;
+    /**
+     * Second Noeud de l'Arc
+     */
     private Noeud noeud2;
+    /**
+     * Longueur de l'Arc
+     */
     private double longueur;
+    /**
+     * Type de l'Arc
+     */
     private TypeArc type;
 
     /**
-     * Créé un nouvel arc
+     * Crée un nouvel arc (appelé lors du chargement d'un XML)
      *
      * @param noeud1 1er noeud
      * @param noeud2 2eme noeud
-     * @param type   type de l'arc
+     * @param type   type de l'arc (format String)
      */
     public Arc(Noeud noeud1, Noeud noeud2, String type, Carte c) {
-        if ((noeud1==null)||(noeud2==null)) {
+        if ((noeud1 == null) || (noeud2 == null)) {
             throw new NullPointerException("Initialisation avec un noeud nul");
         }
         this.noeud1 = noeud1;
@@ -31,8 +43,15 @@ public class Arc extends Observable{
         this.addObserver(c);
     }
 
+    /**
+     * Créé un nouvel arc
+     *
+     * @param noeud1 1er noeud
+     * @param noeud2 2eme noeud
+     * @param type   type de l'arc (format TypeArc)
+     */
     public Arc(Noeud noeud1, Noeud noeud2, TypeArc type, Carte c) {
-        if ((noeud1==null)||(noeud2==null)) {
+        if ((noeud1 == null) || (noeud2 == null)) {
             throw new NullPointerException("Initialisation avec un noeud nul");
         }
         this.noeud1 = noeud1;
@@ -75,7 +94,7 @@ public class Arc extends Observable{
     }
 
     public String toString() {
-        return "Arc : type  : "+type+"\nNoeud 1 :" + noeud1 + "\nNoeud 2 :" + noeud2;
+        return "Arc : type  : " + type + "\nNoeud 1 :" + noeud1 + "\nNoeud 2 :" + noeud2;
     }
 
     /**
@@ -86,7 +105,7 @@ public class Arc extends Observable{
      * @throws IllegalArgumentException si le string de départ ne correspond à rien
      */
     private TypeArc ArcStringToEnum(String s) {
-        s=s.toUpperCase();
+        s = s.toUpperCase();
         TypeArc t;
         if (s.equals("PLAT")) {
             t = TypeArc.PLAT;

@@ -12,20 +12,60 @@ import java.io.File;
  * Created by thomascoquan on 06/05/2015.
  */
 public class InterfacePrincipale extends JFrame {
-
+    /**
+     * Contrôleur du programme
+     */
     Controleur c;
+    /**
+     * Bouton radio d'ajout d'un incendie
+     */
     JRadioButton rbAjoutIncendie;
+    /**
+     * Bouton radio d'ajout d'un noeud
+     */
     JRadioButton rbAjoutNoeud;
+    /**
+     * Bouton radio d'ajout d'un arc
+     */
     JRadioButton rbAjoutArc;
+    /**
+     * Bouton radio d'ajout d'un robot
+     */
     JRadioButton rbAjoutRobot;
+    /**
+     * Liste de sélection du type d'arc
+     */
     JComboBox listTypeArc;
+    /**
+     * Liste de sélection du type de robot
+     */
     JComboBox listRobot;
+    /**
+     * Explorateur de fichiers utilisé lors de la sauvegarde et du chargement d'un XML, et de l'ajout d'une image de fond
+     */
     JFileChooser chooser;
+    /**
+     * Largeur du pannel d'options
+     */
     int OPTIONS_WIDTH = 200;
+    /**
+     * Longueur d'un texte dans les options
+     */
     int OPTION_HEIGHT = 25;
+    /**
+     * Largeur de la carte
+     */
     int CARTE_WIDTH = 600;
+    /**
+     * Longueur de la carte
+     */
     int CARTE_HEIGHT = 600;
 
+    /**
+     * Fonction principale. Crée un nouveau contrôleur et une nouvelle fenêtre
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Controleur c = new Controleur();
         InterfacePrincipale fenetre = new InterfacePrincipale(c);
@@ -43,6 +83,11 @@ public class InterfacePrincipale extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Définit l'objet à ajouter sur la carte à êrtir de l'interface
+     *
+     * @return Entier correspondant au type d'objet à ajouter (comme arc, noeud...)
+     */
     public int typeAjout() {
         if (rbAjoutNoeud.isSelected()) {
             return 1;
@@ -71,6 +116,9 @@ public class InterfacePrincipale extends JFrame {
         }
     }
 
+    /**
+     * Définit l'image de fond de la carte en proposant à l'utilisateur un explorateur de fichiers (JFileChooser)
+     */
     public void setBackground() {
         chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -88,6 +136,10 @@ public class InterfacePrincipale extends JFrame {
         }
     }
 
+    /**
+     * Propose à utilisateur en explorateur de fichiers permettant de choisir un fichier XML
+     * qui sera chargé sur la carte
+     */
     public void setGraphe() {
         chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -102,6 +154,10 @@ public class InterfacePrincipale extends JFrame {
         }
     }
 
+    /**
+     * Propose à l'utilisateur de sauvegarder le graphe de la carte dans un fichier XML dont il déterminera
+     * le dossier est le nom du fichier
+     */
     public void saveGraphe() {
         chooser = new JFileChooser();
         int userSelection = chooser.showSaveDialog(this);
@@ -115,6 +171,9 @@ public class InterfacePrincipale extends JFrame {
         }
     }
 
+    /**
+     * Initialise les composants de la fenêtre : la carte, les options à gauche de la fenêtre et la barre de menu
+     */
     public void initComposant() {
         /**
          * Mise en place de la barre de menu

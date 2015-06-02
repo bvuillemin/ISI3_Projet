@@ -3,11 +3,10 @@ package Vue;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 
-/**
- * Created by benoitvuillemin on 30/05/15.
- */
 public class UtilitairesVue {
-
+    /**
+     * Définit un filtre permettant de choisir uniquement des images (gif, jpeg, jpg ou png)
+     */
     public static class ImageFilter extends FileFilter {
         public String getExtension(File f) {
             String ext = null;
@@ -20,7 +19,6 @@ public class UtilitairesVue {
             return ext;
         }
 
-        //Accept all directories and all gif, jpg, tiff, or png files.
         public boolean accept(File f) {
             if (f.isDirectory()) {
                 return true;

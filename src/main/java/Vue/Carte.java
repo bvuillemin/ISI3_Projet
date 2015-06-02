@@ -10,21 +10,43 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by benoitvuillemin on 11/05/2015.
- */
 public class Carte extends JPanel implements Observer {
-
+    /**
+     * Liste des robots de la carte
+     */
     ArrayList<Robot> listRobot;
+    /**
+     * Liste des noeuds de la carte
+     */
     ArrayList<Noeud> listNoeud;
+    /**
+     * Liste des arcs de la carte
+     */
     ArrayList<Arc> listArc;
+    /**
+     * Permier noeud sélectionné lors de la création d'un arc
+     */
     Noeud noeudSelectionne;
+    /**
+     * Image de fond
+     */
     Image background = null;
+    /**
+     * Image d'un robot à pattes, affiché sur l'interface
+     */
     ImageIcon rpattes = new ImageIcon("src/main/resources/rpattes.png");
+    /**
+     * Image d'un robot chenille, affiché sur l'interface
+     */
     ImageIcon rchenille = new ImageIcon("src/main/resources/rchenille.png");
+    /**
+     * Image d'un robot tout terrain, affiché sur l'interface
+     */
     ImageIcon rtt = new ImageIcon("src/main/resources/rtt.png");
+    /**
+     * Image d'un incendie, affiché sur l'interface
+     */
     ImageIcon incendie = new ImageIcon("src/main/resources/incendie.png");
-    boolean customBackground = false;
 
     public ArrayList<Noeud> getNoeuds() {
         return listNoeud;
@@ -34,12 +56,21 @@ public class Carte extends JPanel implements Observer {
         return listRobot;
     }
 
+    /**
+     * Définit l'image de fond de l'interface
+     *
+     * @param background Image à mettre en fond
+     */
     public void setBackground(Image background) {
         this.background = background;
-        customBackground = true;
         this.repaint();
     }
 
+    /**
+     * Définit le premier noeud sélectionné lors de la création d'un arc (il devient vert)
+     *
+     * @param noeudSelectionne noeud à définir comme sélectionné
+     */
     public void setNoeudSelectionne(Noeud noeudSelectionne) {
         this.noeudSelectionne = noeudSelectionne;
         this.repaint();
@@ -51,12 +82,17 @@ public class Carte extends JPanel implements Observer {
         listArc = new ArrayList<Arc>();
     }
 
+    /**
+     * Supprime l'image de fond de l'interface
+     */
     public void removeBackground() {
         background = null;
-        customBackground = false;
         this.repaint();
     }
 
+    /**
+     * Remet à zéro le graphe de la carte
+     */
     public void reset() {
         listRobot.clear();
         listNoeud.clear();
@@ -64,39 +100,43 @@ public class Carte extends JPanel implements Observer {
         this.repaint();
     }
 
+    /**
+     * Ajoute un robot à la carte
+     *
+     * @param robot Robot à ajouter
+     */
     public void addRobot(Robot robot) {
         listRobot.add(robot);
         this.repaint();
     }
 
+    /**
+     * Ajoute un noeud à la carte
+     *
+     * @param noeud Noeud à ajouter
+     */
     public void addNoeud(Noeud noeud) {
         listNoeud.add(noeud);
         this.repaint();
     }
 
+    /**
+     * Ajoute un arc à la carte
+     *
+     * @param arc Arc à ajouter
+     */
     public void addArc(Arc arc) {
         listArc.add(arc);
         this.repaint();
     }
 
+    /**
+     * Définit les graphismes de la carte
+     *
+     * @param g Graphiques
+     */
     public void paintComponent(Graphics g) {
-        if (customBackground) {
-
-            //Ce code permettait d'adapter les dimensions de l'image à l'interface. Supprimé pour que l'exemple marche
-            //Calcule les nouvelles dimensions de l'image de fond
-            /*Float ratio;
-            if (background.getWidth(null) > ((float) this.getWidth() /
-                    (float) this.getHeight() * (float) background.getHeight(null))) {
-                ratio = (float) background.getWidth(null) / (float) this.getWidth();
-            } else {
-                ratio = (float) background.getHeight(null) / (float) this.getHeight();
-            }
-            int newWidth = Math.round((float) background.getWidth(null) / ratio);
-            int newHeight = Math.round((float) background.getHeight(null) / ratio);
-            //Réduit les dimensions de l'image et la centre
-            g.drawImage(background, (this.getWidth() - newWidth) / 2,
-                    (this.getHeight() - newHeight) / 2, newWidth, newHeight, null);*/
-
+        if (background != null) {
             g.drawImage(background, 0, 0, background.getWidth(null), background.getHeight(null), null);
         }
         for (Noeud n : listNoeud) {
@@ -151,6 +191,12 @@ public class Carte extends JPanel implements Observer {
         }
     }
 
+    /**
+     * Mise à jour des graphismes de la carte
+     *
+     * @param o   Observable
+     * @param arg Appelé lors de l'update
+     */
     public void update(Observable o, Object arg) {
         this.repaint();
     }

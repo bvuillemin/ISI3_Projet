@@ -4,12 +4,30 @@ import Vue.Carte;
 
 import java.util.Observable;
 
-public class Noeud extends Observable{
+public class Noeud extends Observable {
+    /**
+     * compteur d'id
+     */
     private static int idActu = 0;
+    /**
+     * id du Noeud
+     */
     private int id;
+    /**
+     * Abscisse du Noeud
+     */
     private double x;
+    /**
+     * Ordonnée du Noeud
+     */
     private double y;
+    /**
+     * Intensité du Noeud (si c'est un incendie)
+     */
     private int intensite;
+    /**
+     * Type du Noeud
+     */
     private TypeNoeud type;
 
     /**
@@ -20,7 +38,7 @@ public class Noeud extends Observable{
      * @param type type du noeud (String)
      */
     public Noeud(double x, double y, String type, Carte c) {
-        if (c==null) {
+        if (c == null) {
             throw new NullPointerException("Carte null");
         }
         this.id = idActu++;
@@ -44,7 +62,7 @@ public class Noeud extends Observable{
      * @param type type du noeud (String)
      */
     public Noeud(int id, double x, double y, String type, Carte c) {
-        if (c==null) {
+        if (c == null) {
             throw new NullPointerException("Carte null");
         }
         this.id = id;
@@ -68,7 +86,7 @@ public class Noeud extends Observable{
      * @param type type du noeud (TypeNoeud)
      */
     public Noeud(int id, double x, double y, TypeNoeud type, Carte c) {
-        if (c==null) {
+        if (c == null) {
             throw new NullPointerException("Carte null");
         }
         this.id = id;
@@ -91,7 +109,7 @@ public class Noeud extends Observable{
      * @param type type du noeud (TypeNoeud)
      */
     public Noeud(double x, double y, TypeNoeud type, Carte c) {
-        if (c==null) {
+        if (c == null) {
             throw new NullPointerException("Carte null");
         }
         this.id = idActu++;

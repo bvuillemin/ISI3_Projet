@@ -6,12 +6,18 @@ import java.util.ArrayList;
  * Created by benoitvuillemin on 06/05/2015.
  */
 public class Graphe {
+    /**
+     * Liste des Arcs du graphe
+     */
     private ArrayList<Arc> liste_arcs;
+    /**
+     * Liste des Noeuds du graphe
+     */
     private ArrayList<Noeud> liste_noeuds;
 
     public Graphe() {
-        this.liste_arcs=new ArrayList<Arc>();
-        this.liste_noeuds=new ArrayList<Noeud>();
+        this.liste_arcs = new ArrayList<Arc>();
+        this.liste_noeuds = new ArrayList<Noeud>();
     }
 
     /**
@@ -48,7 +54,7 @@ public class Graphe {
      */
     public void supprimerNoeud(Noeud n) {
         liste_noeuds.remove(n);
-        for (int i=0; i<liste_arcs.size(); i++) {
+        for (int i = 0; i < liste_arcs.size(); i++) {
             Arc arc = liste_arcs.get(i);
             if (arc.getNoeud1() == n || arc.getNoeud2() == n) {
                 liste_arcs.remove(arc);
@@ -108,9 +114,17 @@ public class Graphe {
         return null;
     }
 
+    /**
+     * Vérifie si l'utilisateur a cliqué sur un noeud lors de la création d'un arc
+     * (vérifie à 5 pixels près, évite de devoir cliquer au pixel près)
+     *
+     * @param x Abscisse du clic
+     * @param y Ordonnée du clic
+     * @return Le noeud sur lequel l'utilisateur a cliqué, null si l'utilisateur n'a cliqué sur rien
+     */
     public Noeud contientAppro(int x, int y) {
         for (Noeud n : liste_noeuds) {
-            if ((n.getX()-5<=x)&&(n.getX()+5>=x)&&(n.getY()-5<=y)&&(n.getY()+5>=y)) {
+            if ((n.getX() - 5 <= x) && (n.getX() + 5 >= x) && (n.getY() - 5 <= y) && (n.getY() + 5 >= y)) {
                 return n;
             }
         }
