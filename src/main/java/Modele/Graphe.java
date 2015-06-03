@@ -2,9 +2,6 @@ package Modele;
 
 import java.util.ArrayList;
 
-/**
- * Created by benoitvuillemin on 06/05/2015.
- */
 public class Graphe {
     /**
      * Liste des Arcs du graphe

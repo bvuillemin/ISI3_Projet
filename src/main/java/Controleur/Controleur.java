@@ -37,7 +37,8 @@ public class Controleur implements ActionListener, MouseListener {
     }
 
     public void setPath_XML(String path_XML) {
-        g = GestionXML.LectureXML(path_XML);
+        this.carte.reset();
+        g = GestionXML.LectureXML(path_XML, this.carte);
         for (Noeud noeud : g.getListe_noeud()) {
             carte.addNoeud(noeud);
         }

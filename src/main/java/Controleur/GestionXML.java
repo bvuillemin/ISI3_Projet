@@ -17,9 +17,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by benoitvuillemin on 06/05/2015.
- */
 public class GestionXML {
     /**
      * Copie le contenu d'un fichier xml dans un graphe
@@ -27,14 +24,13 @@ public class GestionXML {
      * @param repertoire répertoire du fichier XML
      * @return le graphe associé
      */
-    public static Graphe LectureXML(String repertoire) {
+    public static Graphe LectureXML(String repertoire, Carte c) {
         Graphe g = new Graphe();
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File(repertoire);
         try {
             Document document = (Document) builder.build(xmlFile);
             Element rootNode = document.getRootElement();
-            Carte c = new Carte();
             List list_noeud_xml = rootNode.getChildren("node");
             List list_arc_xml = rootNode.getChildren("edge");
             ArrayList<Noeud> liste_noeud = new ArrayList<Noeud>();
