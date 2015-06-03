@@ -109,6 +109,7 @@ public abstract class Robot extends Observable implements Runnable{
      */
     public void run() {
         occupe = true;
+        double distanceParcActu=0.0;
         Arc morceauChemin;
         if (chemin == null) {
             System.out.println("Pas de chemin à suivre.");
@@ -116,10 +117,14 @@ public abstract class Robot extends Observable implements Runnable{
             while (chemin.isEmpty() == false) {
                 try {
                     morceauChemin = chemin.get(0);
+                    distanceParcActu = morceauChemin.getLongueur();
                     System.out.println(morceauChemin);
                     if (this.capablePasser(morceauChemin.getType())==false) {
                         System.out.println("Impossible de passer");
                         return;
+                    }
+                    synchronized (this) {
+                        this.wait((int)distanceParcActu*10);
                     }
                     if (noeudActuel==morceauChemin.getNoeud1()) {
                         noeudActuel = morceauChemin.getNoeud2();
@@ -129,9 +134,6 @@ public abstract class Robot extends Observable implements Runnable{
                     chemin.remove(morceauChemin);
                     this.setChanged();
                     this.notifyObservers();
-                    synchronized (this) {
-                        this.wait(1000);
-                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
