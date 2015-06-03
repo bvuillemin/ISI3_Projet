@@ -1,8 +1,7 @@
 package Controleur;
 
-//import org.dom4j.DocumentException;
-
 import Modele.Graphe;
+import Vue.Carte;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -15,20 +14,18 @@ import java.io.IOException;
 import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;
 
 
-/**
- * Created by benoitvuillemin on 06/05/2015.
- */
 public class TestGestionXML {
     final String repertoire = "src/test/resources/test.xml";
+    Carte c = new Carte();
 
     /**
      * Teste la lecture et l'écriture d'un fichier XML
      *
      * @throws Exception si la lecture ou l'écriture ne marchent pas
      */
-    /*@Test
+    @Test
     public void testXML() throws Exception {
-        Graphe g = GestionXML.LectureXML(repertoire, );
+        Graphe g = GestionXML.LectureXML(repertoire, c);
         try {
             GestionXML.SauvegardeXML(g, "src/test/resources/essai.xml");
             BufferedReader br1 = new BufferedReader(new FileReader(new File("src/test/resources/test.xml")));
@@ -55,5 +52,5 @@ public class TestGestionXML {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

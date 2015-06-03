@@ -7,6 +7,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import com.apple.eawt.Application;
 
 /**
  * Created by thomascoquan on 06/05/2015.
@@ -60,6 +61,10 @@ public class InterfacePrincipale extends JFrame {
      * Longueur de la carte
      */
     int CARTE_HEIGHT = 600;
+    /**
+     * Icone de l'interface
+     */
+    ImageIcon icone = new ImageIcon("src/main/resources/icone.png");
 
     /**
      * Fonction principale. Crée un nouveau contrôleur et une nouvelle fenêtre
@@ -80,6 +85,9 @@ public class InterfacePrincipale extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComposant();
+        this.setIconImage(icone.getImage());
+        Application application = Application.getApplication();
+        application.setDockIconImage(icone.getImage());
         this.setVisible(true);
     }
 

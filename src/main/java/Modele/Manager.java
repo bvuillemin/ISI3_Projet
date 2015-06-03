@@ -23,7 +23,7 @@ public class Manager {
             }
         }
         ArrayList<Robot> listRobots = (ArrayList<Robot>) carte.getRobots().clone();
-        PlusCoursChemin pcc = new PlusCoursChemin();
+        Parcours pcc = new ParcoursLargeur();
         ArrayList<Arc> chemin;
         double distance;
         double distanceMini;
@@ -35,7 +35,7 @@ public class Manager {
                 robotChoisi=null;
                 for (Robot robot : listRobots) {
                     distance = 0.0;
-                    chemin = pcc.ParcoursLargeur(robot, g, incendie);
+                    chemin = pcc.Parcourir(robot, g, incendie);
                     if (chemin != null) {
                         for (Arc arc : chemin) {
                             distance += arc.getLongueur();
