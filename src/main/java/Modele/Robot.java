@@ -13,10 +13,8 @@ public abstract class Robot extends Observable implements Runnable{
 
     protected Noeud noeudActuel;
     protected ArrayList<TypeArc> listTypeArcTraversable;
-    protected ArrayList<Arc> listArcPlusCourt;
     protected ArrayList<Arc> chemin;
     protected Graphe graphe;
-    protected Map dijkstra;
     protected int capacite;
     protected boolean occupe;
 
@@ -76,14 +74,14 @@ public abstract class Robot extends Observable implements Runnable{
      */
     public void eteindreIncendie() throws InterruptedException {
         try {
-            int probaInondation = 3;
+            int probaInondation = 2;
             int rand=0;
             if (noeudActuel.getType() == TypeNoeud.INCENDIE) {
                 while (noeudActuel.getIntensite() != 0) {
                     noeudActuel.setIntensite(noeudActuel.getIntensite() - capacite);
                     for (Arc arc_voisin : graphe.getListe_arcs()) {
                         if (((arc_voisin.getNoeud1() == noeudActuel) || (arc_voisin.getNoeud2() == noeudActuel))&&(arc_voisin.getType()!=TypeArc.INNONDE)) {
-                            rand = (int) (Math.random() * (9) + 1);
+                            rand = (int) (Math.random() * (14) + 1);
                             if (rand<probaInondation) {
                                 arc_voisin.setType(TypeArc.INNONDE);
                             }
