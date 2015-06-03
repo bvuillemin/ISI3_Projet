@@ -122,7 +122,7 @@ public class InterfacePrincipale extends JFrame {
     public void setBackground() {
         chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileFilter imageFilter = new ImageFilter.ImageFilter();
+        FileFilter imageFilter = new ImageFilter();
 
         chooser.addChoosableFileFilter(imageFilter);
         chooser.setAcceptAllFileFilterUsed(false);
