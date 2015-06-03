@@ -28,7 +28,6 @@ public class PlusCoursChemin {
         while (!listNoeud.isEmpty()){
             actuel = listNoeud.removeFirst();
             if (actuel != goal) {
-                //afficher(s) ??
                 //on récupère la liste des voisins
                 for (Arc arc_voisin : listArc) {
                     if (((arc_voisin.getNoeud1() == actuel) || (arc_voisin.getNoeud2() == actuel))&&(robot.capablePasser(arc_voisin.getType())!=false)) {
@@ -36,17 +35,16 @@ public class PlusCoursChemin {
                     }
                 }
                 for (Arc e : listArc_voisin) {
-                    //on regarde si l'element est marqué
                     if (e.getNoeud1() == actuel) {
                         if (!listMarque.containsKey(e.getNoeud2())) {
                             listNoeud.add(e.getNoeud2());
-                            listMarque.put(e.getNoeud2(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listMarque.put(e.getNoeud2(), e.getLongueur() + listMarque.get(actuel));
                             listArcOpti.put(e.getNoeud2(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
                             listArcOpti.get(e.getNoeud2()).add(e);
                         } else if (listMarque.get(e.getNoeud2()) > (e.getLongueur() + listMarque.get(actuel))) {
                             listNoeud.add(e.getNoeud2());
                             listMarque.remove(e.getNoeud2());
-                            listMarque.put(e.getNoeud2(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listMarque.put(e.getNoeud2(), e.getLongueur() + listMarque.get(actuel));
                             listArcOpti.remove(e.getNoeud2());
                             listArcOpti.put(e.getNoeud2(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
                             listArcOpti.get(e.getNoeud2()).add(e);
@@ -54,13 +52,13 @@ public class PlusCoursChemin {
                     } else if (e.getNoeud2() == actuel) {
                         if (!listMarque.containsKey(e.getNoeud1())) {
                             listNoeud.add(e.getNoeud1());
-                            listMarque.put(e.getNoeud1(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listMarque.put(e.getNoeud1(), e.getLongueur() + listMarque.get(actuel));
                             listArcOpti.put(e.getNoeud1(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
                             listArcOpti.get(e.getNoeud1()).add(e);
                         } else if (listMarque.get(e.getNoeud1()) > (e.getLongueur() + listMarque.get(actuel))) {
                             listNoeud.add(e.getNoeud1());
                             listMarque.remove(e.getNoeud1());
-                            listMarque.put(e.getNoeud1(), (double) e.getLongueur() + listMarque.get(actuel));
+                            listMarque.put(e.getNoeud1(), e.getLongueur() + listMarque.get(actuel));
                             listArcOpti.remove(e.getNoeud1());
                             listArcOpti.put(e.getNoeud1(), (ArrayList<Arc>) listArcOpti.get(actuel).clone());
                             listArcOpti.get(e.getNoeud1()).add(e);
