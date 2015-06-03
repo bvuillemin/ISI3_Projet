@@ -9,9 +9,6 @@ import java.awt.*;
 import java.io.File;
 import com.apple.eawt.Application;
 
-/**
- * Created by thomascoquan on 06/05/2015.
- */
 public class InterfacePrincipale extends JFrame {
     /**
      * Contrôleur du programme

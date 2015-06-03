@@ -2,9 +2,6 @@ package Modele;
 
 import java.util.*;
 
-/**
- * Created by Dorian on 24/05/2015.
- */
 public class ParcoursLargeur extends Parcours {
 
 

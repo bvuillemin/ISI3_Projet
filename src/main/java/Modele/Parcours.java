@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
-/**
- * Created by benoitvuillemin on 03/06/15.
- */
+
 public abstract class Parcours {
     Noeud actuel;
     LinkedList<Noeud> listNoeud;

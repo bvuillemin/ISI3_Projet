@@ -4,9 +4,7 @@ import Vue.Carte;
 
 import java.util.ArrayList;
 
-/**
- * Created by thomascoquan on 06/05/2015.
- */
+
 public class Manager {
 
     public void affecterIncendie(Carte carte, Graphe g) {

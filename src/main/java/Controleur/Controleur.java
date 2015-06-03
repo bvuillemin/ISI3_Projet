@@ -11,9 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- * Created by thomascoquan on 28/05/2015.
- */
+
 public class Controleur implements ActionListener, MouseListener {
 
     Carte carte;
