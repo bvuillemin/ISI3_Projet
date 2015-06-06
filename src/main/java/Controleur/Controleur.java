@@ -165,7 +165,7 @@ public class Controleur implements ActionListener, MouseListener {
                 System.out.println("Nouveau Robot à Pattes");
                 n = g.contientAppro(e.getX() + 10, e.getY() + 10);
                 if (n != null) {
-                    Robot r = new RobotAPates(n, carte, g);
+                    Robot r = new RobotAPattes(n, carte, g);
                     carte.addRobot(r);
                 }
                 break;

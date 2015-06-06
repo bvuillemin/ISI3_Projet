@@ -36,10 +36,10 @@ public class TestRobotAPates {
     private ArrayList<Arc> cheminPlat = new ArrayList<Arc>();
 
     /**
-     * Test pour l'ensemble des fonctions de la classe abstraite Robot via sa classe fille RobotAPates
+     * Test pour l'ensemble des fonctions de la classe abstraite Robot via sa classe fille RobotAPattes
      */
     public TestRobotAPates() {
-        //r0 = new RobotAPates(null);
+        //r0 = new RobotAPattes(null);
     }
 
     @BeforeClass

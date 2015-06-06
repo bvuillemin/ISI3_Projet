@@ -178,7 +178,7 @@ public class Carte extends JPanel implements Observer {
                     (int) a.getNoeud2().getX() - 10, (int) a.getNoeud2().getY() - 10);
         }
         for (Robot r : listRobot) {
-            if (r instanceof RobotAPates) {
+            if (r instanceof RobotAPattes) {
                 g.drawImage(rpattes.getImage(), (int) r.getNoeudActuel().getX() - 10, (int) r.getNoeudActuel().getY() - 10,
                         20, 20, null);
             } else if (r instanceof RobotChenille) {
