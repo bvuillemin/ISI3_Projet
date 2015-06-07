@@ -82,7 +82,7 @@ public class Controleur implements ActionListener, MouseListener {
      * Supprime l'image de fond de la carte
      */
     public void removeBackground() {
-        carte.removeBackground();
+        carte.supprimerImageFond();
     }
 
     /**
@@ -91,7 +91,7 @@ public class Controleur implements ActionListener, MouseListener {
      * @param i Image à mettre en fond
      */
     public void setBackground(Image i) {
-        carte.setBackground(i);
+        carte.setImageFond(i);
     }
 
     /**

@@ -33,23 +33,23 @@ public class Carte extends JPanel implements Observer {
     /**
      * Image de fond
      */
-    Image background = null;
+    Image imageFond = null;
     /**
      * Image d'un robot à pattes, affiché sur l'interface
      */
-    ImageIcon rpattes = new ImageIcon("src/main/resources/rpattes.png");
+    ImageIcon rpattes = new ImageIcon("ressources/rpattes.png");
     /**
      * Image d'un robot chenille, affiché sur l'interface
      */
-    ImageIcon rchenille = new ImageIcon("src/main/resources/rchenille.png");
+    ImageIcon rchenille = new ImageIcon("ressources/rchenille.png");
     /**
      * Image d'un robot tout terrain, affiché sur l'interface
      */
-    ImageIcon rtt = new ImageIcon("src/main/resources/rtt.png");
+    ImageIcon rtt = new ImageIcon("ressources/rtt.png");
     /**
      * Image d'un incendie, affiché sur l'interface
      */
-    ImageIcon incendie = new ImageIcon("src/main/resources/incendie.png");
+    ImageIcon incendie = new ImageIcon("ressources/incendie.png");
 
     public ArrayList<Noeud> getNoeuds() {
         return listNoeud;
@@ -59,14 +59,22 @@ public class Carte extends JPanel implements Observer {
         return listRobot;
     }
 
+    public ArrayList<Arc> getArcs() {
+        return listArc;
+    }
+
     /**
      * Définit l'image de fond de l'interface
      *
-     * @param background Image à mettre en fond
+     * @param imageFond Image à mettre en fond
      */
-    public void setBackground(Image background) {
-        this.background = background;
+    public void setImageFond(Image imageFond) {
+        this.imageFond = imageFond;
         this.repaint();
+    }
+
+    public Image getImageFond() {
+        return imageFond;
     }
 
     /**
@@ -79,6 +87,15 @@ public class Carte extends JPanel implements Observer {
         this.repaint();
     }
 
+    /**
+     * Retourne le premier noeud sélectionné lors de la création d'un arc (il devient vert)
+     *
+     * @return Premier noeud
+     */
+    public Noeud getNoeudSelectionne() {
+        return noeudSelectionne;
+    }
+
     public Carte() {
         listRobot = new ArrayList<Robot>();
         listNoeud = new ArrayList<Noeud>();
@@ -88,8 +105,8 @@ public class Carte extends JPanel implements Observer {
     /**
      * Supprime l'image de fond de l'interface
      */
-    public void removeBackground() {
-        background = null;
+    public void supprimerImageFond() {
+        imageFond = null;
         this.repaint();
     }
 
@@ -139,8 +156,8 @@ public class Carte extends JPanel implements Observer {
      * @param g Graphiques
      */
     public void paintComponent(Graphics g) {
-        if (background != null) {
-            g.drawImage(background, 0, 0, background.getWidth(null), background.getHeight(null), null);
+        if (imageFond != null) {
+            g.drawImage(imageFond, 0, 0, imageFond.getWidth(null), imageFond.getHeight(null), null);
         }
         for (Noeud n : listNoeud) {
             if (n.getIntensite() == 0) {

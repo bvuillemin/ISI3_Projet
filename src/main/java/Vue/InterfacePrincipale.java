@@ -65,7 +65,7 @@ public class InterfacePrincipale extends JFrame {
     /**
      * Icone de l'interface
      */
-    ImageIcon icone = new ImageIcon("src/main/resources/icone.png");
+    ImageIcon icone = new ImageIcon("ressources/icone.png");
 
     /**
      * Fonction principale. Crée un nouveau contrôleur et une nouvelle fenêtre
@@ -93,7 +93,7 @@ public class InterfacePrincipale extends JFrame {
     }
 
     /**
-     * Définit l'objet à ajouter sur la carte à êrtir de l'interface
+     * Définit l'objet à ajouter sur la carte à partir de l'interface
      *
      * @return Entier correspondant au type d'objet à ajouter (comme arc, noeud...)
      */
