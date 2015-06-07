@@ -4,13 +4,16 @@ import Vue.Carte;
 
 import java.util.Observable;
 
+/**
+ * Noeud du graphe, pouvant être un incendie ou non
+ */
 public class Noeud extends Observable {
     /**
-     * compteur d'id
+     * Compteur d'id
      */
     private static int idActu = 0;
     /**
-     * id du Noeud
+     * Id du Noeud
      */
     private int id;
     /**
@@ -36,6 +39,7 @@ public class Noeud extends Observable {
      * @param x    abscisse du noeud
      * @param y    ordonnée du noeud
      * @param type type du noeud (String)
+     * @param c    Carte de l'application (pour ajouter l'Observer)
      */
     public Noeud(double x, double y, String type, Carte c) {
         if (c == null) {
@@ -59,6 +63,7 @@ public class Noeud extends Observable {
      * @param id   id du noeud
      * @param x    abscisse du noeud
      * @param y    ordonnée du noeud
+     * @param c    Carte de l'application (pour ajouter l'Observer)
      * @param type type du noeud (String)
      */
     public Noeud(int id, double x, double y, String type, Carte c) {
@@ -84,6 +89,7 @@ public class Noeud extends Observable {
      * @param x    abscisse du noeud
      * @param y    ordonnée du noeud
      * @param type type du noeud (TypeNoeud)
+     * @param c    Carte de l'application (pour ajouter l'Observer)
      */
     public Noeud(int id, double x, double y, TypeNoeud type, Carte c) {
         if (c == null) {
@@ -107,6 +113,7 @@ public class Noeud extends Observable {
      * @param x    abscisse du noeud
      * @param y    ordonnée du noeud
      * @param type type du noeud (TypeNoeud)
+     * @param c    Carte de l'application (pour ajouter l'Observer)
      */
     public Noeud(double x, double y, TypeNoeud type, Carte c) {
         if (c == null) {

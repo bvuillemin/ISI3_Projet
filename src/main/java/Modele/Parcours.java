@@ -4,15 +4,42 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
-
+/**
+ * Classe abstraite de parcours de graphe
+ */
 public abstract class Parcours {
+    /**
+     * Noeud actuel
+     */
     Noeud actuel;
+    /**
+     * Liste de noeuds
+     */
     LinkedList<Noeud> listNoeud;
+    /**
+     * Liste d'arcs
+     */
     ArrayList<Arc> listArc;
+    /**
+     * Robot du parcours
+     */
     Robot robot;
+    /**
+     * Liste d'arcs otimisée
+     */
     LinkedHashMap<Noeud, ArrayList<Arc>> listArcOpti;
+    /**
+     * Liste d'arcs marqués
+     */
     LinkedHashMap<Noeud, Double> listMarque;
 
+    /**
+     * Initialisation du parcours
+     *
+     * @param robot Robot du parcours
+     * @param graph Graphe du parcours
+     * @param goal  But à atteindre du parcours
+     */
     public void init(Robot robot, Graphe graph, Noeud goal) {
         this.robot = robot;
         actuel = robot.noeudActuel;
@@ -25,8 +52,22 @@ public abstract class Parcours {
         listArc = graph.getListe_arcs();
     }
 
+    /**
+     * Fonction qui permet de parcourir le graphe pour trouver le plus court chemin
+     *
+     * @param robot Robot du parcours
+     * @param graph Graphe du parcours
+     * @param goal  But à atteindre du parcours
+     * @return liste des Noeuds à parcourir pour atteindre le but
+     */
     public abstract ArrayList<Arc> Parcourir(Robot robot, Graphe graph, Noeud goal);
 
+    /**
+     * Trouve la liste des arcs d'un Noeud
+     *
+     * @param n Noeud en paramètre
+     * @return Liste des arcs du Noeud
+     */
     protected ArrayList<Arc> voisins(Noeud n) {
         ArrayList<Arc> listArc_voisin = new ArrayList<Arc>();
         for (Arc arc_voisin : listArc) {
@@ -37,6 +78,13 @@ public abstract class Parcours {
         return listArc_voisin;
     }
 
+    /**
+     * Renvoie le deuxième Noeud d'un Arc passée en paramètre
+     *
+     * @param a      Arc
+     * @param noeud1 Permier Noeud
+     * @return Le deuxième Noeud
+     */
     protected Noeud deuxiemeNoeudArc(Arc a, Noeud noeud1) {
         if (a.getNoeud1() == noeud1) {
             return a.getNoeud2();

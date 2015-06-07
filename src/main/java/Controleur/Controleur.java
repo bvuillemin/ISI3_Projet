@@ -11,14 +11,33 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
+/**
+ * Controleur général de l'application
+ */
 public class Controleur implements ActionListener, MouseListener {
-
+    /**
+     * Carte de l'application (Vue)
+     */
     Carte carte;
+    /**
+     * Interface principale de l'application (Vue)
+     */
     InterfacePrincipale ip;
+    /**
+     * Graphe de l'application (Modèle)
+     */
     Graphe g;
+    /**
+     * Définit si l'utilisateur, lors de la création d'un arc, a cliqué sur le premier noeud
+     */
     boolean premierClic = true;
+    /**
+     * Premier noeud de l'arc lors de sa création
+     */
     Noeud noeudTmp;
+    /**
+     * Manager de l'application
+     */
     Manager manager = new Manager();
 
     public void setCarte(Carte carte) {
@@ -59,14 +78,27 @@ public class Controleur implements ActionListener, MouseListener {
         this.carte.setBackground(Color.WHITE);
     }
 
+    /**
+     * Supprime l'image de fond de la carte
+     */
     public void removeBackground() {
         carte.removeBackground();
     }
 
+    /**
+     * Définit l'image de fond de la carte
+     *
+     * @param i Image à mettre en fond
+     */
     public void setBackground(Image i) {
         carte.setBackground(i);
     }
 
+    /**
+     * Définit les taches à faire lorsque l'utilisateur a cliqué sur un bouton du menu
+     *
+     * @param e ActionEvent
+     */
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
         if (c.equals("Nouveau graphe")) {
@@ -86,6 +118,11 @@ public class Controleur implements ActionListener, MouseListener {
         }
     }
 
+    /**
+     * Définit les taches à faire lorsque l'utilisateur a cliqué sur la carte
+     *
+     * @param e MouseEvent
+     */
     public void mouseClicked(MouseEvent e) {
         int typeAjout = ip.typeAjout();
         Noeud n;
@@ -93,7 +130,7 @@ public class Controleur implements ActionListener, MouseListener {
             case 1:
                 System.out.println("Nouveau Noeud");
                 n = g.contientAppro(e.getX() + 10, e.getY() + 10);
-                if (n==null) {
+                if (n == null) {
                     n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.NORMAL, carte);
                     g.ajouterNoeud(n);
                     carte.addNoeud(n);
@@ -102,7 +139,7 @@ public class Controleur implements ActionListener, MouseListener {
             case 2:
                 System.out.println("Nouvel Incendie");
                 n = g.contientAppro(e.getX() + 10, e.getY() + 10);
-                if (n==null) {
+                if (n == null) {
                     n = new Noeud(e.getX() + 10, e.getY() + 10, TypeNoeud.INCENDIE, carte);
                     g.ajouterNoeud(n);
                     carte.addNoeud(n);

@@ -3,27 +3,49 @@ package Modele;
 import Vue.Carte;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Observable;
 
-public abstract class Robot extends Observable implements Runnable{
-
+/**
+ * Robot de l'application
+ */
+public abstract class Robot extends Observable implements Runnable {
+    /**
+     * Noeud sur lequel se trouve le robot
+     */
     protected Noeud noeudActuel;
+    /**
+     * liste de type d'Arcs que le robot peut traverser
+     */
     protected ArrayList<TypeArc> listTypeArcTraversable;
+    /**
+     * Chemin que d'emprunter le robot pour aller à l'incendie
+     */
     protected ArrayList<Arc> chemin;
+    /**
+     * Graphe sur lequel se situe le robot
+     */
     protected Graphe graphe;
+    /**
+     * Capacité du robot
+     */
     protected int capacite;
+    /**
+     * Détermine si le robot est occupé ou non
+     */
     protected boolean occupe;
 
     /**
      * Constructeur d'un Robot
      * Robot est une classe abstraite.
-     * @param noeudActuel
+     *
+     * @param noeudActuel Noeud sur lequel est placé le robot
+     * @param c           Carte sur lequel est placé le robot (utile pour l'observer)
+     * @param g           Graphe du robot
      */
     public Robot(Noeud noeudActuel, Carte c, Graphe g) {
         this.noeudActuel = noeudActuel;
-        capacite=1;
-        this.graphe=g;
+        capacite = 1;
+        this.graphe = g;
         this.addObserver(c);
     }
 
@@ -49,7 +71,8 @@ public abstract class Robot extends Observable implements Runnable{
 
     /**
      * Indique si le robot est capable de passer ce type d'arc
-     * @param typeArc
+     *
+     * @param typeArc Type de l'arc en question
      * @return vrai si capable, faux sinon
      */
     public boolean capablePasser(TypeArc typeArc) {
@@ -66,20 +89,21 @@ public abstract class Robot extends Observable implements Runnable{
     /**
      * Fonction pour éteindre un incendie
      * Si le noeud sur lequel se trouve le robot n'est pas un incendie, on le signal
-     * Sinon, on éteins l'incendie : chaque seconde l'intensité de l'incendie sera diminué de la capacité du robot.
-     * @throws InterruptedException
+     * Sinon, on éteint l'incendie : chaque seconde, l'intensité de l'incendie sera diminué de la capacité du robot.
+     *
+     * @throws InterruptedException peut être renvoyé lors du wait
      */
     public void eteindreIncendie() throws InterruptedException {
         try {
             int probaInondation = 2;
-            int rand=0;
+            int rand = 0;
             if (noeudActuel.getType() == TypeNoeud.INCENDIE) {
                 while (noeudActuel.getIntensite() != 0) {
                     noeudActuel.setIntensite(noeudActuel.getIntensite() - capacite);
                     for (Arc arc_voisin : graphe.getListe_arcs()) {
-                        if (((arc_voisin.getNoeud1() == noeudActuel) || (arc_voisin.getNoeud2() == noeudActuel))&&(arc_voisin.getType()!=TypeArc.INNONDE)) {
+                        if (((arc_voisin.getNoeud1() == noeudActuel) || (arc_voisin.getNoeud2() == noeudActuel)) && (arc_voisin.getType() != TypeArc.INNONDE)) {
                             rand = (int) (Math.random() * (14) + 1);
-                            if (rand<probaInondation) {
+                            if (rand < probaInondation) {
                                 arc_voisin.setType(TypeArc.INNONDE);
                             }
                         }
@@ -106,7 +130,7 @@ public abstract class Robot extends Observable implements Runnable{
      */
     public void run() {
         occupe = true;
-        double distanceParcActu=0.0;
+        double distanceParcActu = 0.0;
         Arc morceauChemin;
         if (chemin == null) {
             System.out.println("Pas de chemin à suivre.");
@@ -116,14 +140,14 @@ public abstract class Robot extends Observable implements Runnable{
                     morceauChemin = chemin.get(0);
                     distanceParcActu = morceauChemin.getLongueur();
                     System.out.println(morceauChemin);
-                    if (this.capablePasser(morceauChemin.getType())==false) {
+                    if (this.capablePasser(morceauChemin.getType()) == false) {
                         System.out.println("Impossible de passer");
                         return;
                     }
                     synchronized (this) {
-                        this.wait((int)distanceParcActu*10);
+                        this.wait((int) distanceParcActu * 10);
                     }
-                    if (noeudActuel==morceauChemin.getNoeud1()) {
+                    if (noeudActuel == morceauChemin.getNoeud1()) {
                         noeudActuel = morceauChemin.getNoeud2();
                     } else {
                         noeudActuel = morceauChemin.getNoeud1();

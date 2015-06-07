@@ -7,6 +7,9 @@ import java.util.Observable;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
+/**
+ * Arc du graphe
+ */
 public class Arc extends Observable {
     /**
      * Permier Noeud de l'Arc
@@ -31,6 +34,7 @@ public class Arc extends Observable {
      * @param noeud1 1er noeud
      * @param noeud2 2eme noeud
      * @param type   type de l'arc (format String)
+     * @param c      Carte de l'application (pour ajouter l'Observer)
      */
     public Arc(Noeud noeud1, Noeud noeud2, String type, Carte c) {
         if ((noeud1 == null) || (noeud2 == null)) {
@@ -44,11 +48,12 @@ public class Arc extends Observable {
     }
 
     /**
-     * Créé un nouvel arc
+     * Crée un nouvel arc
      *
      * @param noeud1 1er noeud
      * @param noeud2 2eme noeud
      * @param type   type de l'arc (format TypeArc)
+     * @param c      Carte de l'application (pour ajouter l'Observer)
      */
     public Arc(Noeud noeud1, Noeud noeud2, TypeArc type, Carte c) {
         if ((noeud1 == null) || (noeud2 == null)) {

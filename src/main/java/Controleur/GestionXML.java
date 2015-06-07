@@ -1,6 +1,5 @@
 package Controleur;
 
-
 import Modele.Arc;
 import Modele.Graphe;
 import Modele.Noeud;
@@ -17,11 +16,15 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe qui s'occupe de toute la gestion des fichiers XML (sauvegarde et chargement)
+ */
 public class GestionXML {
     /**
      * Copie le contenu d'un fichier xml dans un graphe
      *
      * @param repertoire répertoire du fichier XML
+     * @param c          Carte sur laquelle seront aussi ajoutés les éléments
      * @return le graphe associé
      */
     public static Graphe LectureXML(String repertoire, Carte c) {

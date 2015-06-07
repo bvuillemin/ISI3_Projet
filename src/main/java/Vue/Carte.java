@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Carte de l'interface graphique : affiche les robots, noeuds, arcs, et l'image de fond
+ */
 public class Carte extends JPanel implements Observer {
     /**
      * Liste des robots de la carte

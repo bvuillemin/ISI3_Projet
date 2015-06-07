@@ -3,7 +3,9 @@ package Modele;
 import Vue.Carte;
 
 import java.util.ArrayList;
-
+/**
+ * Type de robot précis : robot chenille
+ */
 public class RobotChenille extends Robot {
 
     public RobotChenille(Noeud noeudActuel, Carte c, Graphe g) {

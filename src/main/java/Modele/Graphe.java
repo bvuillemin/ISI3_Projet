@@ -2,6 +2,9 @@ package Modele;
 
 import java.util.ArrayList;
 
+/**
+ * Graphe de l'application, contenant noeuds et arcs
+ */
 public class Graphe {
     /**
      * Liste des Arcs du graphe

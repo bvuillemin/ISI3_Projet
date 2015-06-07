@@ -4,9 +4,15 @@ import Vue.Carte;
 
 import java.util.ArrayList;
 
-
+/**
+ * Manager de l'application, utilisé lors de l'affectation d'un incendie
+ */
 public class Manager {
-
+    /**
+     * Affecte un incendie à un robot
+     * @param carte Carte de l'application
+     * @param g Graphe de l'application
+     */
     public void affecterIncendie(Carte carte, Graphe g) {
         if (carte==null) {
             throw new NullPointerException("Carte null");

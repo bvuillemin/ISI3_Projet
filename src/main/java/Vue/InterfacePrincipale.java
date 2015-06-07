@@ -7,8 +7,12 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+
 import com.apple.eawt.Application;
 
+/**
+ * Interface principale du programme : affiche la carte et les menus d'ajouts d'éléments
+ */
 public class InterfacePrincipale extends JFrame {
     /**
      * Contrôleur du programme
@@ -66,7 +70,7 @@ public class InterfacePrincipale extends JFrame {
     /**
      * Fonction principale. Crée un nouveau contrôleur et une nouvelle fenêtre
      *
-     * @param args
+     * @param args Utilisé lors d'un main
      */
     public static void main(String[] args) {
         Controleur c = new Controleur();
