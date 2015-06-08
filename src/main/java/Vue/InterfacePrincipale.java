@@ -43,6 +43,10 @@ public class InterfacePrincipale extends JFrame {
      */
     JComboBox listRobot;
     /**
+     * Liste de sélection du type de parcours
+     */
+    JComboBox listParcours;
+    /**
      * Explorateur de fichiers utilisé lors de la sauvegarde et du chargement d'un XML, et de l'ajout d'une image de fond
      */
     JFileChooser chooser;
@@ -125,6 +129,17 @@ public class InterfacePrincipale extends JFrame {
         }
     }
 
+    /**
+     * Définit le type de parcours à lancer
+     *
+     * @return Entier correspondant au type de parcours à lancer
+     */
+    public String typeParcours() {
+        if(listParcours.getSelectedIndex() == 0){
+            return "Largeur";
+        }
+        return "Cout";
+    }
     /**
      * Définit l'image de fond de la carte en proposant à l'utilisateur un explorateur de fichiers (JFileChooser)
      */
@@ -331,13 +346,47 @@ public class InterfacePrincipale extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 11;
         gbc.gridwidth = 5;
+        gbc.gridheight = 2;
+        espaceVide = new JLabel("");
+        espaceVide.setPreferredSize(new Dimension(OPTIONS_WIDTH * 9 / 10, OPTION_HEIGHT / 3));
+        option.add(espaceVide, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 13;
+        gbc.gridwidth = 5;
+        gbc.gridheight = 1;
+        espaceVide = new JLabel("Parcours :");
+        espaceVide.setPreferredSize(new Dimension(OPTIONS_WIDTH * 9 / 10, OPTION_HEIGHT));
+        option.add(espaceVide, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 15;
+        gbc.gridwidth = 5;
+        gbc.gridheight = 2;
+        espaceVide = new JLabel("");
+        espaceVide.setPreferredSize(new Dimension(OPTIONS_WIDTH * 9 / 10, OPTION_HEIGHT / 3));
+        option.add(espaceVide, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 17;
+        gbc.gridwidth = 5;
+        gbc.gridheight = 1;
+        listParcours = new JComboBox();
+        listParcours.setPreferredSize(new Dimension(OPTIONS_WIDTH * 8 / 10, OPTION_HEIGHT));
+        listParcours.addItem("En Largeur");
+        listParcours.addItem("Cout Uniforme");
+        option.add(listParcours, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 18;
+        gbc.gridwidth = 5;
         gbc.gridheight = 5;
         espaceVide = new JLabel("");
         espaceVide.setPreferredSize(new Dimension(OPTIONS_WIDTH * 9 / 10, OPTION_HEIGHT * 2));
         option.add(espaceVide, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 16;
+        gbc.gridy = 23;
         gbc.gridwidth = 5;
         gbc.gridheight = 2;
         JButton buttonLancer = new JButton("Lancer");

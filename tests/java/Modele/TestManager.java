@@ -23,16 +23,17 @@ public class TestManager {
 
     Carte c = new Carte();
 
-    Noeud n1 = new Noeud(0.0,1.0,TypeNoeud.NORMAL,c);
-    Noeud n2 = new Noeud(7.0,3.0,TypeNoeud.INCENDIE,c);
-    Noeud n4 = new Noeud(5.0,2.0,TypeNoeud.INCENDIE,c);
+    Noeud n1 = new Noeud(0.0, 1.0, TypeNoeud.NORMAL, c);
+    Noeud n2 = new Noeud(7.0, 3.0, TypeNoeud.INCENDIE, c);
+    Noeud n4 = new Noeud(5.0, 2.0, TypeNoeud.INCENDIE, c);
 
-    Arc a4 = new Arc(n4,n1,TypeArc.PLAT,c);
+    Arc a4 = new Arc(n4, n1, TypeArc.PLAT, c);
 
-    Robot r1 = new RobotToutTerrain(n1,c,g);
+    Robot r1 = new RobotToutTerrain(n1, c, g);
 
     ArrayList<Noeud> listNoeud = new ArrayList<Noeud>();
     ArrayList<Arc> listArc = new ArrayList<Arc>();
+
     /**
      * Test pour l'ensemble des fonctions de la classe Graphe
      */
@@ -41,7 +42,7 @@ public class TestManager {
         listNoeud.add(n1);
         listNoeud.add(n2);
         listNoeud.add(n4);
-        g = new Graphe(listArc,listNoeud);
+        g = new Graphe(listArc, listNoeud);
         c.addArc(a4);
         c.addNoeud(n1);
         c.addNoeud(n2);
@@ -65,23 +66,27 @@ public class TestManager {
 
     @Test(expected = NullPointerException.class)
     public void testCarteNull() {
-        m.affecterIncendie(null,g);
+        Parcours p = new ParcoursLargeur();
+        m.affecterIncendie(null, g, p);
     }
 
     @Test(expected = NullPointerException.class)
     public void testGrapheNull() {
+        Parcours p = new ParcoursLargeur();
         c.addRobot(r1);
-        m.affecterIncendie(c,null);
+        m.affecterIncendie(c, null, p);
     }
 
     @Test
     public void testIncendieInatteignable() {
+        Parcours p = new ParcoursLargeur();
         c.addRobot(r1);
-        m.affecterIncendie(c,g);
+        m.affecterIncendie(c, g, p);
     }
 
     @Test
     public void testManqueRobot() {
-        m.affecterIncendie(c,g);
+        Parcours p = new ParcoursLargeur();
+        m.affecterIncendie(c, g, p);
     }
 }

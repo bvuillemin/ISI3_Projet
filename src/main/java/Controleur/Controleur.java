@@ -114,7 +114,14 @@ public class Controleur implements ActionListener, MouseListener {
         } else if (c.equals("Sauvegarder un graphe")) {
             ip.saveGraphe();
         } else if (c.equals("Lancer")) {
-            manager.affecterIncendie(carte, g);
+            if(ip.typeParcours() == "Largeur"){
+                Parcours p = new ParcoursLargeur();
+                manager.affecterIncendie(carte, g, p);
+            }
+            else{
+                Parcours p = new ParcoursCoutUniforme();
+                manager.affecterIncendie(carte, g, p);
+            }
         }
     }
 

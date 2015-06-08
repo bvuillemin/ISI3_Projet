@@ -14,7 +14,7 @@ public class Manager {
      * @param carte Carte de l'application
      * @param g Graphe de l'application
      */
-    public void affecterIncendie(Carte carte, Graphe g) {
+    public void affecterIncendie(Carte carte, Graphe g, Parcours pcc) {
         if (carte==null) {
             throw new NullPointerException("Carte null");
         }
@@ -28,7 +28,6 @@ public class Manager {
             }
         }
         ArrayList<Robot> listRobots = (ArrayList<Robot>) carte.getRobots().clone();
-        Parcours pcc = new ParcoursLargeur();
         ArrayList<Arc> chemin;
         double distance;
         double distanceMini;
