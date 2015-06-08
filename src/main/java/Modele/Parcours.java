@@ -3,7 +3,6 @@ package Modele;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Classe abstraite de parcours de graphe
@@ -17,24 +16,22 @@ public abstract class Parcours {
      * Liste de noeuds
      */
     LinkedList<Noeud> listNoeud;
+    /**
+     * Liste des noeuds explorés
+     */
     ArrayList<Noeud> listExplore;
     /**
      * Liste d'arcs
      */
     ArrayList<Arc> listArc;
-    ArrayList<Arc> cheminFounded;
     /**
      * Robot du parcours
      */
     Robot robot;
     /**
-     * Liste d'arcs otimisée
+     * Liste des chemins optimaux
      */
     LinkedHashMap<Noeud, ArrayList<Arc>> listArcOpti;
-    /**
-     * Liste d'arcs marqués
-     */
-    LinkedHashMap<Noeud, Double> listMarque;
 
     /**
      * Initialisation du parcours
@@ -44,16 +41,15 @@ public abstract class Parcours {
      */
     public void init(Robot robot, Graphe graph) {
         this.robot = robot;
-        actuel = robot.noeudActuel;
+        actuel=null;
         listNoeud = new LinkedList<Noeud>();
         listExplore = new ArrayList<Noeud>();
         listArcOpti = new LinkedHashMap<Noeud, ArrayList<Arc>>();
         //listMarque = new LinkedHashMap<Noeud, Double>();
-        listNoeud.add(actuel);
+        listNoeud.add(robot.noeudActuel);
         //listMarque.put(actuel, 0.0);
-        listArcOpti.put(actuel, new ArrayList<Arc>());
+        listArcOpti.put(robot.noeudActuel, new ArrayList<Arc>());
         listArc = graph.getListe_arcs();
-        cheminFounded = new ArrayList<Arc>();
     }
 
     /**
@@ -62,7 +58,7 @@ public abstract class Parcours {
      * @param robot Robot du parcours
      * @param graph Graphe du parcours
      * @param goal  But à atteindre du parcours
-     * @return liste des Noeuds à parcourir pour atteindre le but
+     * @return liste des Arcs à parcourir pour atteindre le but
      */
     public ArrayList<Arc> Parcourir(Robot robot, Graphe graph, Noeud goal) {
         init(robot, graph);
@@ -70,6 +66,7 @@ public abstract class Parcours {
             if (listNoeud.isEmpty()!=false) {
                 return null;
             }
+            System.out.println("Noeuds : "+listNoeud);
             actuel = listNoeud.remove(choixIndex());
             if (actuel==goal) {
                 return listArcOpti.get(goal);
@@ -79,7 +76,17 @@ public abstract class Parcours {
         }
     }
 
+    /**
+     * Retourne l'index du noeuds suivants à parcourir dans un parcours en fonction du type d'algo
+     * @return index choisi
+     */
     protected abstract int choixIndex();
+
+    /**
+     * Parcourt les enfants du noeud en fonction du type d'algo pour voir si le but ne s'y trouve pas et sinon s'en
+     * approcher
+     * @param n Noeud à développer
+     */
     protected abstract void developper(Noeud n);
 
     /**
