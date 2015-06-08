@@ -66,7 +66,6 @@ public abstract class Parcours {
             if (listNoeud.isEmpty()!=false) {
                 return null;
             }
-            System.out.println("Noeuds : "+listNoeud);
             actuel = listNoeud.remove(choixIndex());
             if (actuel==goal) {
                 return listArcOpti.get(goal);
