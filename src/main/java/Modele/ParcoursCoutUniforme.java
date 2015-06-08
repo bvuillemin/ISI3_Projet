@@ -70,7 +70,7 @@ public class ParcoursCoutUniforme extends Parcours {
                 i++;
             }
             if (i == voisins.size()) {
-                return -1;
+                return 0;
             }
             double distanceMin = voisins.get(i).getLongueur();
             Noeud nSuiv = deuxiemeNoeudArc(voisins.get(i), actuel);
