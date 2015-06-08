@@ -6,14 +6,13 @@
 
 package Modele;
 
+import Controleur.Manager;
 import Vue.Carte;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 
 public class TestManager {

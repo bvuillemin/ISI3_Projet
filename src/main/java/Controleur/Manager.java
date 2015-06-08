@@ -1,5 +1,6 @@
-package Modele;
+package Controleur;
 
+import Modele.*;
 import Vue.Carte;
 
 import java.util.ArrayList;
