@@ -3,6 +3,7 @@ package Modele;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Classe abstraite de parcours de graphe
@@ -16,10 +17,12 @@ public abstract class Parcours {
      * Liste de noeuds
      */
     LinkedList<Noeud> listNoeud;
+    ArrayList<Noeud> listExplore;
     /**
      * Liste d'arcs
      */
     ArrayList<Arc> listArc;
+    ArrayList<Arc> cheminFounded;
     /**
      * Robot du parcours
      */
@@ -38,18 +41,19 @@ public abstract class Parcours {
      *
      * @param robot Robot du parcours
      * @param graph Graphe du parcours
-     * @param goal  But à atteindre du parcours
      */
-    public void init(Robot robot, Graphe graph, Noeud goal) {
+    public void init(Robot robot, Graphe graph) {
         this.robot = robot;
         actuel = robot.noeudActuel;
         listNoeud = new LinkedList<Noeud>();
+        listExplore = new ArrayList<Noeud>();
         listArcOpti = new LinkedHashMap<Noeud, ArrayList<Arc>>();
-        listMarque = new LinkedHashMap<Noeud, Double>();
+        //listMarque = new LinkedHashMap<Noeud, Double>();
         listNoeud.add(actuel);
-        listMarque.put(actuel, 0.0);
+        //listMarque.put(actuel, 0.0);
         listArcOpti.put(actuel, new ArrayList<Arc>());
         listArc = graph.getListe_arcs();
+        cheminFounded = new ArrayList<Arc>();
     }
 
     /**
@@ -60,7 +64,23 @@ public abstract class Parcours {
      * @param goal  But à atteindre du parcours
      * @return liste des Noeuds à parcourir pour atteindre le but
      */
-    public abstract ArrayList<Arc> Parcourir(Robot robot, Graphe graph, Noeud goal);
+    public ArrayList<Arc> Parcourir(Robot robot, Graphe graph, Noeud goal) {
+        init(robot, graph);
+        while (true) {
+            if (listNoeud.isEmpty()!=false) {
+                return null;
+            }
+            actuel = listNoeud.remove(choixIndex());
+            if (actuel==goal) {
+                return listArcOpti.get(goal);
+            }
+            listExplore.add(actuel);
+            developper(actuel);
+        }
+    }
+
+    protected abstract int choixIndex();
+    protected abstract void developper(Noeud n);
 
     /**
      * Trouve la liste des arcs d'un Noeud
@@ -92,12 +112,5 @@ public abstract class Parcours {
             return a.getNoeud1();
         }
         return null;
-    }
-
-    protected void cheminAmeliore(Noeud n, Arc a) {
-        listNoeud.add(n);
-        listMarque.put(n, a.getLongueur() + listMarque.get(actuel));
-        listArcOpti.put(n, (ArrayList<Arc>) listArcOpti.get(actuel).clone());
-        listArcOpti.get(n).add(a);
     }
 }

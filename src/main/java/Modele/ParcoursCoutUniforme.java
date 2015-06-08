@@ -2,7 +2,7 @@ package Modele;
 
 import java.util.*;
 
-public class ParcoursProfondeur extends Parcours {
+public class ParcoursCoutUniforme extends Parcours {
 
     /*public ArrayList<Arc> Parcourir(Robot robot, Graphe graph, Noeud goal){
         super.init(robot, graph, goal);
@@ -47,6 +47,24 @@ public class ParcoursProfondeur extends Parcours {
 
         }
         return listArcOpti.get(goal);
+    }
+
+    protected int choixIndex() {
+        return 0;
+    }
+
+    protected void developper(Noeud n) {
+        ArrayList<Arc> listArc_voisin;
+        Noeud nTmp;
+        listArc_voisin=voisins(n);
+        for (Arc a : listArc_voisin) {
+            nTmp = deuxiemeNoeudArc(a,n);
+            if ((listNoeud.contains(nTmp)==false)&&(listExplore.contains(nTmp))) {
+                listNoeud.add(nTmp);
+                listArcOpti.put(nTmp,listArcOpti.get(actuel));
+                listArcOpti.get(nTmp).add(a);
+            }
+        }
     }
 }
 

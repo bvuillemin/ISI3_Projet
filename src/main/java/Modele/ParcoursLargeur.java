@@ -15,7 +15,7 @@ public class ParcoursLargeur extends Parcours {
      * @param goal  But à atteindre du parcours
      * @return liste des Noeuds à parcourir pour atteindre le but
      */
-    public ArrayList<Arc> Parcourir(Robot robot, Graphe graph, Noeud goal) {
+    /*public ArrayList<Arc> Parcourir(Robot robot, Graphe graph, Noeud goal) {
         super.init(robot, graph, goal);
         Noeud nTemp;
         ArrayList<Arc> listArc_voisin;
@@ -37,7 +37,31 @@ public class ParcoursLargeur extends Parcours {
             }
         }
         return listArcOpti.get(goal);
+    }*/
+
+    protected int choixIndex() {
+        return 0;
     }
 
+    protected void developper(Noeud n) {
+        ArrayList<Arc> listArc_voisin;
+        Noeud nTmp;
+        listArc_voisin=voisins(n);
+        for (Arc a : listArc_voisin) {
+            nTmp = deuxiemeNoeudArc(a,n);
+            if ((listNoeud.contains(nTmp)==false)&&(listExplore.contains(nTmp))==false) {
+                listNoeud.add(nTmp);
+                listArcOpti.put(nTmp, (ArrayList<Arc>) listArcOpti.get(actuel).clone());
+                listArcOpti.get(nTmp).add(a);
+            }
+        }
+    }
+
+    protected void cheminAmeliore(Noeud n, Arc a) {
+        listNoeud.add(n);
+        listMarque.put(n, a.getLongueur() + listMarque.get(actuel));
+        listArcOpti.put(n, (ArrayList<Arc>) listArcOpti.get(actuel).clone());
+        listArcOpti.get(n).add(a);
+    }
 
 }
