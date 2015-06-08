@@ -11,18 +11,20 @@ import java.util.ArrayList;
 public class Manager {
     /**
      * Affecte un incendie à un robot
+     *
      * @param carte Carte de l'application
-     * @param g Graphe de l'application
+     * @param g     Graphe de l'application
+     * @param pcc   Parcours à implémenter
      */
     public void affecterIncendie(Carte carte, Graphe g, Parcours pcc) {
-        if (carte==null) {
+        if (carte == null) {
             throw new NullPointerException("Carte null");
         }
         ArrayList<Noeud> listIncendies = (ArrayList<Noeud>) carte.getNoeuds().clone();
         Noeud n;
-        for (int i=0; i<listIncendies.size(); i++) {
-            n=listIncendies.get(i);
-            if (n.getIntensite()==0) {
+        for (int i = 0; i < listIncendies.size(); i++) {
+            n = listIncendies.get(i);
+            if (n.getIntensite() == 0) {
                 listIncendies.remove(i);
                 i--;
             }
@@ -34,9 +36,9 @@ public class Manager {
         Robot robotChoisi;
         ArrayList<Arc> cheminChoisi = null;
         for (Noeud incendie : listIncendies) {
-            if (listRobots.isEmpty()==false) {
-                distanceMini=Double.MAX_VALUE;
-                robotChoisi=null;
+            if (listRobots.isEmpty() == false) {
+                distanceMini = Double.MAX_VALUE;
+                robotChoisi = null;
                 for (Robot robot : listRobots) {
                     distance = 0.0;
                     chemin = pcc.Parcourir(robot, g, incendie);
@@ -51,7 +53,7 @@ public class Manager {
                         }
                     }
                 }
-                if (robotChoisi!=null) {
+                if (robotChoisi != null) {
                     robotChoisi.setChemin(cheminChoisi);
                     new Thread(robotChoisi).start();
                     listRobots.remove(robotChoisi);
